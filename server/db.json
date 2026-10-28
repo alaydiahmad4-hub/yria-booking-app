@@ -1,0 +1,359 @@
+{
+  "properties": [
+    {
+      "id": "prop-1",
+      "title": "فيلا ومزرعة الزمرد الفاخرة مع مسبح خاص وسواتر",
+      "type": "farm",
+      "governorate": "ريف دمشق",
+      "area": "يعفور - طريق الصبورة",
+      "priceUsd": 120,
+      "dayUsePriceUsd": 80,
+      "rentalType": "both",
+      "instantBooking": true,
+      "discountWeeklyPercent": 15,
+      "securityDepositUsd": 40,
+      "rating": 4.95,
+      "reviewCount": 38,
+      "status": "approved",
+      "isVerifiedField": true,
+      "verificationNotes": "تم فحص منظومة الليثيوم 24/7 وفلترة المسبح والسواتر بتاريخ 5 أكتوبر 2026",
+      "ratingBreakdown": {
+        "cleanliness": 4.9,
+        "accuracy": 5,
+        "electricity": 4.9,
+        "host": 5,
+        "value": 4.8
+      },
+      "houseRules": {
+        "familiesOnly": true,
+        "partiesAllowed": false,
+        "petsAllowed": false
+      },
+      "coordinates": {
+        "lat": 33.52,
+        "lng": 36.14
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "maxGuests": 12,
+      "description": "مزرعة راقية جداً في أرقى مناطق يعفور، مسبح خاص معقم بالفلترة الأوتوماتيكية وسواتر خشبية تضمن الخصوصية العائلية التامة.",
+      "electricity": {
+        "type": "solar_24_7",
+        "label": "منظومة طاقة شمسية ليثيوم 24/7 تشغل المكيفات",
+        "hasAirConditioningOnSolar": true
+      },
+      "hasWifi": true,
+      "wifiSpeed": "فايبر نت ألياف ضوئية 40 ميغابت",
+      "hasPool": true,
+      "poolDetails": {
+        "isHeated": true,
+        "isIndoor": false,
+        "hasPrivacyScreen": true
+      },
+      "hasWaterReserve": true,
+      "amenities": [
+        "مسبح خاص كبير",
+        "سواتر خصوصية 100%",
+        "طاقة شمسية 24/7",
+        "إنترنت فايبر",
+        "شواية باربيكيو"
+      ],
+      "host": {
+        "name": "أبو عمر الدمشقي",
+        "phone": "+963933112233",
+        "whatsapp": "963933112233",
+        "isSuperhost": true,
+        "responseRate": "100% خلال 15 دقيقة"
+      },
+      "featured": true
+    },
+    {
+      "id": "prop-2",
+      "title": "شاليه بورتو طرطوس إطلالة بانورامية مباشرة على البحر",
+      "type": "chalet",
+      "governorate": "طرطوس",
+      "area": "بورتو طرطوس - الكورنيش الجديد",
+      "priceUsd": 85,
+      "rentalType": "overnight",
+      "instantBooking": true,
+      "discountWeeklyPercent": 10,
+      "securityDepositUsd": 30,
+      "rating": 4.88,
+      "reviewCount": 44,
+      "status": "approved",
+      "isVerifiedField": true,
+      "verificationNotes": "تم فحص أمبيرات المجمع 24 ساعة ونظافة التراس المباشر على البحر",
+      "ratingBreakdown": {
+        "cleanliness": 4.8,
+        "accuracy": 4.9,
+        "electricity": 4.8,
+        "host": 4.9,
+        "value": 4.9
+      },
+      "houseRules": {
+        "familiesOnly": false,
+        "partiesAllowed": false,
+        "petsAllowed": false
+      },
+      "coordinates": {
+        "lat": 34.889,
+        "lng": 35.8866
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "maxGuests": 6,
+      "description": "شاليه فاخر ومجدد بالكامل في مجمع بورتو طرطوس الراقي مع شرفة واسعة مطلة على البحر.",
+      "electricity": {
+        "type": "solar_24_7",
+        "label": "أمبيرات المجمع 24 ساعة + طاقة شمسية احتياطية",
+        "hasAirConditioningOnSolar": true
+      },
+      "hasWifi": true,
+      "wifiSpeed": "إنترنت واي فاي سريع 4G",
+      "hasPool": true,
+      "hasWaterReserve": true,
+      "amenities": [
+        "إطلالة بحرية",
+        "شاطئ خاص",
+        "مصعد 24/7",
+        "أمن وحراسة"
+      ],
+      "host": {
+        "name": "م. سامر الساحلي",
+        "phone": "+963944556677",
+        "whatsapp": "963944556677",
+        "isSuperhost": true,
+        "responseRate": "98% خلال 30 دقيقة"
+      },
+      "featured": true
+    },
+    {
+      "id": "prop-3",
+      "title": "مزرعة الياسمين والهدوء مع مسبح عائلي في صحنايا",
+      "type": "farm",
+      "governorate": "ريف دمشق",
+      "area": "صحنايا - طريق مفرق أشرفية",
+      "priceUsd": 95,
+      "dayUsePriceUsd": 65,
+      "rentalType": "both",
+      "instantBooking": false,
+      "discountWeeklyPercent": 10,
+      "securityDepositUsd": 30,
+      "rating": 4.8,
+      "reviewCount": 14,
+      "status": "pending_approval",
+      "isVerifiedField": false,
+      "verificationNotes": "قيد الزيارة الميدانية للتحقق من قدرة الطاقة الشمسية على تشغيل المكيفات",
+      "ratingBreakdown": {
+        "cleanliness": 4.7,
+        "accuracy": 4.8,
+        "electricity": 4.6,
+        "host": 4.8,
+        "value": 4.7
+      },
+      "houseRules": {
+        "familiesOnly": true,
+        "partiesAllowed": false,
+        "petsAllowed": false
+      },
+      "coordinates": {
+        "lat": 33.43,
+        "lng": 36.24
+      },
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "maxGuests": 10,
+      "description": "مزرعة جديدة مضافة من قبل المالك بانتظار اعتماد الإدارة وفحص الطاقة الشمسية.",
+      "electricity": {
+        "type": "solar_24_7",
+        "label": "طاقة شمسية 12 لوح مع إنفيرتر 5KVA",
+        "hasAirConditioningOnSolar": true
+      },
+      "hasWifi": true,
+      "hasPool": true,
+      "poolDetails": {
+        "isHeated": false,
+        "isIndoor": false,
+        "hasPrivacyScreen": true
+      },
+      "hasWaterReserve": true,
+      "amenities": [
+        "مسبح عائلي",
+        "سواتر خشبية",
+        "طاقة شمسية",
+        "منطقة ألعاب أطفال"
+      ],
+      "host": {
+        "name": "أبو فراس الصحناوي",
+        "phone": "+963999443322",
+        "whatsapp": "963999443322",
+        "isSuperhost": false,
+        "responseRate": "مضيف جديد"
+      }
+    }
+  ],
+  "bookings": [
+    {
+      "id": "book-1792943193401",
+      "createdAt": "2026-10-25T15:46:33.401Z",
+      "depositUsd": 50,
+      "depositSyp": 750000,
+      "remainingUsd": 150,
+      "remainingSyp": 2250000,
+      "paymentStatus": "cash_on_arrival",
+      "escrowStatus": "held_in_escrow",
+      "checkOut": "2026-11-03",
+      "guestName": "??? ??????? ?????",
+      "propertyId": "prop-1",
+      "guestPhone": "+963944111222",
+      "paymentMethod": "cash_deposit",
+      "nights": 2,
+      "totalPriceSyp": 3000000,
+      "totalPriceUsd": 200,
+      "checkIn": "2026-11-01"
+    },
+    {
+      "id": "book-1791836594313",
+      "createdAt": "2026-10-12T20:23:14.313Z",
+      "depositUsd": 140,
+      "depositSyp": 2100000,
+      "remainingUsd": 420,
+      "remainingSyp": 6300000,
+      "paymentStatus": "pending_verification",
+      "escrowStatus": "held_in_escrow",
+      "guestName": "?. ???? ????? (????? ?? ???????)",
+      "guestPhone": "+4917612345678",
+      "propertyId": "1",
+      "propertyTitle": "???? ???? ???????? ???????",
+      "checkIn": "2026-10-20",
+      "checkOut": "2026-10-22",
+      "guestsCount": 6,
+      "bookingType": "overnight",
+      "totalPriceUsd": 560,
+      "totalPriceSyp": 8400000,
+      "paymentMethod": "usdt_trc20",
+      "isExpatriate": true,
+      "expatCountry": "??????? ????",
+      "transactionReference": "0x8f7c9b32e10a88dfb41829e924a6cd21",
+      "specialRequests": "??????? ?? ?????? ?????? ??? ???????"
+    },
+    {
+      "id": "book-101",
+      "propertyId": "prop-1",
+      "propertyTitle": "فيلا ومزرعة الزمرد الفاخرة في يعفور",
+      "bookingType": "day_use",
+      "checkIn": "2026-10-15",
+      "checkOut": "2026-10-15",
+      "guestsCount": 8,
+      "guestName": "عمر الشريف",
+      "guestPhone": "0933556677",
+      "totalPriceUsd": 80,
+      "totalPriceSyp": 1160000,
+      "depositUsd": 20,
+      "depositSyp": 290000,
+      "remainingUsd": 60,
+      "remainingSyp": 870000,
+      "paymentMethod": "syriatel_cash",
+      "transactionRef": "SYR-984210",
+      "paymentStatus": "deposit_confirmed",
+      "escrowStatus": "held_in_escrow",
+      "createdAt": "2026-10-11T14:20:00Z"
+    },
+    {
+      "id": "book-102",
+      "propertyId": "prop-2",
+      "propertyTitle": "شاليه بورتو طرطوس إطلالة بحرية",
+      "bookingType": "overnight",
+      "checkIn": "2026-10-18",
+      "checkOut": "2026-10-21",
+      "guestsCount": 4,
+      "guestName": "ريم مارديني (مغتربة)",
+      "guestPhone": "+971501234567",
+      "totalPriceUsd": 255,
+      "totalPriceSyp": 3697500,
+      "depositUsd": 64,
+      "depositSyp": 928000,
+      "remainingUsd": 191,
+      "remainingSyp": 2769500,
+      "paymentMethod": "mtn_cash",
+      "transactionRef": "MTN-441209",
+      "paymentStatus": "pending_verification",
+      "escrowStatus": "held_in_escrow",
+      "createdAt": "2026-10-11T18:45:00Z"
+    }
+  ],
+  "chatMessages": [
+    {
+      "id": "msg-welcome",
+      "sender": "support",
+      "senderName": "مستشار سيران الذكي",
+      "text": "أهلاً بك في منصة سيران سوريا 🌿! كيف يمكننا مساعدتك اليوم؟ يمكنك الاستفسار عن توفر المزارع والشاليهات، منظومات الطاقة الشمسية، أو المساعدة في الحجز وطرق الدفع بالليرة والدولار.",
+      "timestamp": "2026-10-27T18:03:55.454Z",
+      "status": "read"
+    },
+    {
+      "id": "msg-1793124235457-ps6q",
+      "sender": "user",
+      "senderName": "أحمد المغترب",
+      "text": "هل تتوفر طاقة شمسية ومكيفات 24 ساعة في مزارع يعفور؟",
+      "propertyId": null,
+      "timestamp": "2026-10-27T18:03:55.457Z",
+      "status": "delivered"
+    },
+    {
+      "id": "msg-1793124235458-reply",
+      "sender": "support",
+      "senderName": "مستشار سيران الذكي",
+      "text": "⚡ نؤكد لك أن كافة العقارات المعتمدة في سيران مزودة بإما منظومة طاقة شمسية ليثيوم 24/7 تشغل المكيفات أو مولدات احتياطية، مع خط فايبر/إنترنت مستمر ومفحوص ميدانياً.",
+      "propertyId": null,
+      "timestamp": "2026-10-27T18:03:55.457Z",
+      "status": "delivered"
+    },
+    {
+      "id": "msg-1793124467230-smwm",
+      "sender": "user",
+      "senderName": "الضيف",
+      "text": "⚡ هل الكهرباء والمكيفات تعمل 24 ساعة بالطاقة الشمسية؟",
+      "propertyId": null,
+      "timestamp": "2026-10-27T18:07:47.230Z",
+      "status": "delivered"
+    },
+    {
+      "id": "msg-1793124467231-reply",
+      "sender": "support",
+      "senderName": "مستشار سيران الذكي",
+      "text": "⚡ نؤكد لك أن كافة العقارات المعتمدة في سيران مزودة بإما منظومة طاقة شمسية ليثيوم 24/7 تشغل المكيفات أو مولدات احتياطية، مع خط فايبر/إنترنت مستمر ومفحوص ميدانياً.",
+      "propertyId": null,
+      "timestamp": "2026-10-27T18:07:47.230Z",
+      "status": "delivered"
+    },
+    {
+      "id": "msg-1793125281721-ytdi",
+      "sender": "user",
+      "senderName": "الضيف",
+      "text": "ما هي طرق دفع العربون المتاحة في سوريا؟",
+      "propertyId": null,
+      "timestamp": "2026-10-27T18:21:21.721Z",
+      "status": "delivered"
+    },
+    {
+      "id": "msg-1793125281722-reply",
+      "sender": "support",
+      "senderName": "مستشار سيران الذكي",
+      "text": "💳 الدفع في سيران آمن ومحمي بنظام الأمانات (Escrow): تدفع عربون 25% فقط عبر سيريتل كاش أو حوالة الهرم أو كاش باليد، والمبلغ محجوز ولا يُسلّم للمضيف إلا بعد دخولك ومعاينتك للعقار.",
+      "propertyId": null,
+      "timestamp": "2026-10-27T18:21:21.721Z",
+      "status": "delivered"
+    }
+  ]
+}

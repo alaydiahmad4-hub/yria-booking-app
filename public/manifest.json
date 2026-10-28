@@ -1,0 +1,18 @@
+{
+  "name": "سيران سوريا - حجز فنادق ومزارع وشاليهات",
+  "short_name": "سيران سوريا",
+  "description": "المنصة الأولى والوحيدة لحجز الفنادق، المزارع، الشاليهات والشقق المفروشة في سوريا مع ضمان الطاقة الشمسية 24/7 والدفع السهل",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#022c22",
+  "theme_color": "#064e3b",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%23064e3b'/><rect x='16' y='16' width='480' height='480' rx='112' fill='none' stroke='%23f59e0b' stroke-width='12'/><path d='M100 280 L256 140 L412 280' stroke='%23fbbf24' stroke-width='24' stroke-linecap='round'/><circle cx='256' cy='290' r='45' fill='%23ffffff'/><circle cx='256' cy='290' r='20' fill='%23f59e0b'/><path d='M130 380 Q256 350 382 380' stroke='%2338bdf8' stroke-width='16' stroke-linecap='round'/></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
