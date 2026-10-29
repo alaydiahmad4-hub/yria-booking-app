@@ -213,3 +213,25 @@ export interface ChatMessage {
   propertyId?: string | null;
   propertyTitle?: string | null;
 }
+
+export interface AppNotification {
+  id: string;
+  title: string;
+  message: string;
+  time: string;
+  type: 'booking' | 'whatsapp' | 'sms' | 'system' | 'discount';
+  read: boolean;
+  actionUrl?: string;
+  bookingId?: string;
+}
+
+export interface SmsMessage {
+  id: string;
+  sender: 'SYRIATEL' | 'MTN-SY' | 'SEYRAN-VIP';
+  recipientPhone: string;
+  text: string;
+  confirmationCode: string;
+  timestamp: string;
+  status: 'delivered' | 'sent';
+}
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { HeroSearch } from './components/HeroSearch';
 import { CategoryBar } from './components/CategoryBar';
@@ -17,7 +17,11 @@ import { VoucherModal } from './components/VoucherModal';
 import { PhotoLightboxModal } from './components/PhotoLightboxModal';
 import { SplitBillModal } from './components/SplitBillModal';
 import { GeniusLoyaltyModal } from './components/GeniusLoyaltyModal';
-import { BrandHeritageModal } from './components/BrandHeritageModal';
+// Lazy loaded heavy UI components
+const HostPortalPage = lazy(() => import('./components/HostPortalPage'));
+const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal'));
+const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal'));
+
 import { AdminDashboard } from './components/AdminDashboard';
 import { Footer } from './components/Footer';
 import { SyrianSectionsGrid } from './components/SyrianSectionsGrid';
@@ -25,6 +29,83 @@ import { SyrianMarketShowcase } from './components/SyrianMarketShowcase';
 import { SyrianMarketNeedsModal } from './components/SyrianMarketNeedsModal';
 import { OfflineEmergencyModal } from './components/OfflineEmergencyModal';
 import { WhatsAppSupportFAB } from './components/WhatsAppSupportFAB';
+import { useApp } from './context/AppContext';
+import { 
+  Sparkles, 
+  AlertCircle, 
+  RefreshCw, 
+  Hotel, 
+  ArrowLeft, 
+  Building2, 
+  Award,
+  ChevronLeft
+} from 'lucide-react';
+
+// Lazy load heavy UI components
+const HostPortalPage = lazy(() => import('./components/HostPortalPage'));
+const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal'));
+const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal'));
+
+export const MainContent: React.FC = () => {
+  const { 
+    properties, 
+    viewMode,
+    selectedGovernorate, 
+    selectedType, 
+    searchQuery, 
+    onlySolar, 
+    onlyPool, 
+    onlySuperhost, 
+    advancedFilters,
+    setSelectedGovernorate,
+    setSelectedType,
+    setSearchQuery,
+    setOnlySolar,
+    setOnlyPool,
+    setOnlySuperhost,
+    setAdvancedFilters,
+    isAdminMode,
+    activeTab,
+    setActiveTab,
+    syrianSpecialCategory,
+    setSyrianSpecialCategory
+  } = useApp();
+
+  // ...rest of component unchanged
+});
+import { Header } from './components/Header';
+import { HeroSearch } from './components/HeroSearch';
+import { CategoryBar } from './components/CategoryBar';
+import { PropertyCard } from './components/PropertyCard';
+import { InteractiveMap } from './components/InteractiveMap';
+import { DamascusHotelsSection } from './components/DamascusHotelsSection';
+import { BottomNavBar } from './components/BottomNavBar';
+import { PropertyDetailsModal } from './components/PropertyDetailsModal';
+import { BookingModal } from './components/BookingModal';
+import { HostModal } from './components/HostModal';
+import { FavoritesModal } from './components/FavoritesModal';
+import { AdvancedFilterModal } from './components/AdvancedFilterModal';
+import { ReviewsModal } from './components/ReviewsModal';
+import { ComparisonModal } from './components/ComparisonModal';
+import { VoucherModal } from './components/VoucherModal';
+import { PhotoLightboxModal } from './components/PhotoLightboxModal';
+import { SplitBillModal } from './components/SplitBillModal';
+import { GeniusLoyaltyModal } from './components/GeniusLoyaltyModal';
+// Lazy loaded heavy UI components
+const HostPortalPage = lazy(() => import('./components/HostPortalPage'));
+const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal'));
+const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal'));
+
+import { AdminDashboard } from './components/AdminDashboard';
+import { Footer } from './components/Footer';
+import { SyrianSectionsGrid } from './components/SyrianSectionsGrid';
+import { SyrianMarketShowcase } from './components/SyrianMarketShowcase';
+import { SyrianMarketNeedsModal } from './components/SyrianMarketNeedsModal';
+import { OfflineEmergencyModal } from './components/OfflineEmergencyModal';
+import { WhatsAppSupportFAB } from './components/WhatsAppSupportFAB';
+import { HostPortalPage } from './components/HostPortalPage';
+import { NotificationCenterModal } from './components/NotificationCenterModal';
+import { SmsConfirmationModal } from './components/SmsConfirmationModal';
 import { useApp } from './context/AppContext';
 import { 
   Sparkles, 
@@ -242,6 +323,13 @@ export const MainContent: React.FC = () => {
         </main>
       )}
 
+      {/* Sub-page 4: Dedicated Syrian Host Portal */}
+      {activeTab === 'host' && (
+        <main className="flex-1 animate-fadeIn">
+          <HostPortalPage />
+        </main>
+      )}
+
       {/* Sub-page 3: Main Explore & Stays Page */}
       {activeTab === 'explore' && (
         <>
@@ -444,6 +532,8 @@ export const MainContent: React.FC = () => {
       <BrandHeritageModal />
       <SyrianMarketNeedsModal />
       <OfflineEmergencyModal />
+      <NotificationCenterModal />
+      <SmsConfirmationModal />
     </div>
   );
 };

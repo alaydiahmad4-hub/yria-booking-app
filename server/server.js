@@ -4,18 +4,111 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
+import csurf from 'csurf';
+import rateLimit from 'express-rate-limit';
+import { z } from 'zod';
+import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DB_FILE = path.join(__dirname, 'db.json');
 
 const app = express();
+
+// Security middlewares
+const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret_in_prod';
+
+// Rate limiting: max 100 requests per 15 minutes per IP
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { error: 'Too many requests, please try again later.' },
+});
+app.use('/api/', apiLimiter);
+
+// CORS – allow only trusted origins (dev and production)
+const allowedOrigins = ['http://localhost:3000', 'https://syria-booking.example.com'];
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+}));
+
+app.use(cookieParser());
+// CSRF token endpoint for frontend
+app.get('/api/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
+// Dummy login route (for demo purposes)
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+app.post('/api/login', (req, res) => {
+  const parse = loginSchema.safeParse(req.body);
+  if (!parse.success) {
+    return res.status(400).json({ error: 'Invalid login data', details: parse.error.errors });
+  }
+  const { email, password } = parse.data;
+  // In a real app, verify against DB. Here we accept any credentials.
+  const user = { id: 'user-1', email, role: 'host' }; // role can be 'host' or 'admin'
+  const token = jwt.sign(user, JWT_SECRET, { expiresIn: '2h' });
+  // Set HttpOnly cookie
+  res.cookie('token', token, { httpOnly: true, sameSite: 'strict' });
+  res.json({ message: 'Logged in', user });
+});
+
+app.use(csurf({ cookie: true }));
+
+// Helper to verify JWT token
+function authMiddleware(req, res, next) {
+  const token = req.cookies?.token;
+  if (!token) return res.status(401).json({ error: 'Authentication required' });
+  try {
+    const payload = jwt.verify(token, JWT_SECRET);
+    // attach user info to request for later use
+    req.user = payload;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid or expired token' });
+  }
+}
+
 const PORT = 5001;
 
 app.use(cors());
 app.use(express.json());
 
-// Helper to read and write database
+// Zod schemas for request validation
+const propertySchema = z.object({
+  title: z.string().min(1),
+  area: z.string().min(1),
+  governorate: z.string().min(1),
+  priceUsd: z.number().positive(),
+  // other fields can be optional for demo purposes
+});
+
+const bookingSchema = z.object({
+  propertyId: z.string().min(1),
+  userId: z.string().min(1),
+  totalPriceUsd: z.number().positive(),
+  totalPriceSyp: z.number().positive(),
+  paymentMethod: z.enum(['cash_deposit', 'online']),
+  // additional fields as needed
+});
+
 function readDb() {
   try {
     const data = fs.readFileSync(DB_FILE, 'utf-8');
@@ -67,7 +160,31 @@ app.get('/api/properties', (req, res) => {
 });
 
 // POST New Property (from Host)
-app.post('/api/properties', (req, res) => {
+app.post('/api/properties', authMiddleware, (req, res) => {
+  // Validate input using Zod
+  const parseResult = propertySchema.safeParse(req.body);
+  if (!parseResult.success) {
+    return res.status(400).json({ error: 'Invalid property data', details: parseResult.error.errors });
+  }
+  const validData = parseResult.data;
+  const db = readDb();
+  const newProp = {
+    id: `prop-${Date.now()}`,
+    status: req.body.isAdmin ? 'approved' : 'pending_approval',
+    isVerifiedField: false,
+    verificationNotes: 'بانتظار التحقق الميداني من منظومة الطاقة الشمسية والمسبح',
+    rating: 5.0,
+    reviewCount: 0,
+    createdAt: new Date().toISOString(),
+    ...validData,
+    // preserve any extra fields like isAdmin not part of schema
+    ...req.body,
+  };
+
+  db.properties.unshift(newProp);
+  writeDb(db);
+  res.status(201).json(newProp);
+});
   const db = readDb();
   const newProp = {
     id: `prop-${Date.now()}`,

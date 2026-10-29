@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Property, Currency, BookingRequest, PropertyType, Governorate, AdvancedFilterState, ChatMessage } from '../types';
+import { Property, Currency, BookingRequest, PropertyType, Governorate, AdvancedFilterState, ChatMessage, AppNotification, SmsMessage } from '../types';
 import { MOCK_PROPERTIES, SYP_PER_USD } from '../data/mockData';
 import { api } from '../services/api';
 
@@ -12,8 +12,8 @@ interface AppContextType {
   getPriceValue: (priceUsd: number) => { value: number; label: string };
   
   // Navigation & Sub-pages
-  activeTab: 'explore' | 'hotels' | 'map' | 'favorites';
-  setActiveTab: (tab: 'explore' | 'hotels' | 'map' | 'favorites') => void;
+  activeTab: 'explore' | 'hotels' | 'map' | 'favorites' | 'host';
+  setActiveTab: (tab: 'explore' | 'hotels' | 'map' | 'favorites' | 'host') => void;
 
   // View Mode: Grid or Airbnb-style Map
   viewMode: 'grid' | 'map';
@@ -132,6 +132,20 @@ interface AppContextType {
   updatePropertyPrice: (propertyId: string, priceUsd: number) => void;
   deletePropertyLocal: (propertyId: string) => void;
 
+  // Real-time Notifications Engine
+  notifications: AppNotification[];
+  isNotificationOpen: boolean;
+  setIsNotificationOpen: (b: boolean) => void;
+  markAllNotificationsRead: () => void;
+  unreadNotificationCount: number;
+  addNotification: (n: Omit<AppNotification, 'id' | 'time' | 'read'>) => void;
+
+  // Instant SMS Confirmation Simulator
+  isSmsModalOpen: boolean;
+  setIsSmsModalOpen: (b: boolean) => void;
+  latestSms: SmsMessage | null;
+  triggerSmsConfirmation: (booking: BookingRequest) => void;
+
   // Seyran Live Chat & Syrian Smart Concierge
   chatMessages: ChatMessage[];
   isChatOpen: boolean;
@@ -176,7 +190,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return ['prop-1'];
     }
   });
-  const [activeTab, setActiveTab] = useState<'explore' | 'hotels' | 'map' | 'favorites'>('explore');
+  const [activeTab, setActiveTab] = useState<'explore' | 'hotels' | 'map' | 'favorites' | 'host'>('explore');
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
 
   // Persist currency and favorites
@@ -429,9 +443,87 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const isFavorite = (id: string) => favorites.includes(id);
 
+  // Real-time Notifications Engine State
+  const [notifications, setNotifications] = useState<AppNotification[]>([
+    {
+      id: 'notif-1',
+      title: '🇸🇾 مرحباً بك في سيران سوريا',
+      message: 'تم تفعيل حجز الفنادق والشاليهات والمزارع والشقق بالليرة السورية ($ USD & SYP) والدفع عبر سيريتل كاش وشام كاش.',
+      time: 'الآن',
+      type: 'system',
+      read: false
+    },
+    {
+      id: 'notif-2',
+      title: '⚡ ضمان الطاقة والكهرباء 24/7',
+      message: 'جميع المزارع والفنادق المميزة تحمل شارة الطاقة الشمسية الليثيوم 24/7 لتجربة صيف مريحة دون انقطاع.',
+      time: 'منذ ساعة',
+      type: 'discount',
+      read: false
+    },
+    {
+      id: 'notif-3',
+      title: '🏨 افتتاح قسم فنادق دمشق العريقة',
+      message: 'يمكنك الآن حجز فندق الفورسيزونز، داما روز، فندق الشام، والقصور التراثية في دمشق القديمة مع تأكيد فوري.',
+      time: 'اليوم',
+      type: 'booking',
+      read: true
+    }
+  ]);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const unreadNotificationCount = notifications.filter(n => !n.read).length;
+
+  const markAllNotificationsRead = () => {
+    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+  };
+
+  const addNotification = (n: Omit<AppNotification, 'id' | 'time' | 'read'>) => {
+    const newNotif: AppNotification = {
+      ...n,
+      id: `notif-${Date.now()}`,
+      time: 'الآن',
+      read: false
+    };
+    setNotifications(prev => [newNotif, ...prev]);
+  };
+
+  // Instant SMS Confirmation State
+  const [isSmsModalOpen, setIsSmsModalOpen] = useState(false);
+  const [latestSms, setLatestSms] = useState<SmsMessage | null>(null);
+
+  const triggerSmsConfirmation = (booking: BookingRequest) => {
+    const prop = properties.find(p => p.id === booking.propertyId);
+    const propTitle = prop ? prop.title : 'إقامة سيران سوريا';
+    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    const sms: SmsMessage = {
+      id: `sms-${Date.now()}`,
+      sender: 'SYRIATEL',
+      recipientPhone: booking.guestPhone,
+      confirmationCode: otp,
+      text: `سيران سوريا: تم تأكيد حجزك رقم (${booking.id}) بنجاح في ${propTitle}! رمز الدخول وتأكيد الحجز: [${otp}]. شكراً لاختيارك منصة سيران سوريا. لعرض سند الحجز: https://seyran.sy/v/${booking.id}`,
+      timestamp: new Date().toLocaleTimeString('ar-SY', { hour: '2-digit', minute: '2-digit' }),
+      status: 'delivered'
+    };
+    setLatestSms(sms);
+    setIsSmsModalOpen(true);
+  };
+
   const createBooking = (booking: BookingRequest) => {
     setBookings(prev => [booking, ...prev]);
     saveBookingOffline(booking);
+
+    // Add real-time in-app notification
+    const prop = properties.find(p => p.id === booking.propertyId);
+    addNotification({
+      title: `🎉 تأكيد حجز جديد: ${booking.id}`,
+      message: `تم تسجيل حجزك بنجاح في ${prop ? prop.title : 'العقار'} (${booking.guestsCount} ضيوف). تم إرسال سند الحجز إلى هاتفك.`,
+      type: 'booking',
+      bookingId: booking.id
+    });
+
+    // Trigger instant SMS simulation
+    triggerSmsConfirmation(booking);
+
     // Persist to backend database
     api.createBooking(booking).catch(e => console.warn(e));
   };
@@ -686,6 +778,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         updatePropertyAvailability,
         updatePropertyPrice,
         deletePropertyLocal,
+        notifications,
+        isNotificationOpen,
+        setIsNotificationOpen,
+        markAllNotificationsRead,
+        unreadNotificationCount,
+        addNotification,
+        isSmsModalOpen,
+        setIsSmsModalOpen,
+        latestSms,
+        triggerSmsConfirmation,
         chatMessages,
         isChatOpen,
         setIsChatOpen,

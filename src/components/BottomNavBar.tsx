@@ -65,31 +65,40 @@ export const BottomNavBar: React.FC = () => {
           )}
         </button>
 
-        {/* Tab 3: Host & Hotel Portal (Direct Mobile Access) */}
+        {/* Tab 3: Interactive Map */}
         <button
-          onClick={() => setIsAddPropertyOpen(true)}
-          className="flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative text-emerald-800 hover:text-emerald-950 font-bold"
+          onClick={() => setActiveTab('map')}
+          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative ${
+            activeTab === 'map'
+              ? 'text-emerald-700 font-black'
+              : 'text-slate-500 hover:text-slate-900 font-medium'
+          }`}
         >
-          <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-xs">
-            <Building2 className="w-4 h-4 text-amber-300" />
-          </div>
-          <span className="text-[9px] mt-0.5 font-black text-emerald-800">بوابة المضيف</span>
+          <Map className={`w-5 h-5 ${activeTab === 'map' ? 'stroke-[2.5]' : 'stroke-2'}`} />
+          <span className="text-[10px] mt-0.5">الخريطة</span>
+          {activeTab === 'map' && (
+            <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full mt-0.5"></span>
+          )}
         </button>
 
-        {/* Tab 4: Offline Resilient & Emergency Voucher */}
+        {/* Tab 4: Host & Hotel Portal */}
         <button
-          onClick={() => setIsOfflineModalOpen(true)}
-          className="flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative text-slate-500 hover:text-slate-900 font-medium"
+          onClick={() => setActiveTab('host')}
+          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all relative ${
+            activeTab === 'host'
+              ? 'text-emerald-700 font-black'
+              : 'text-slate-500 hover:text-slate-900 font-medium'
+          }`}
         >
-          <div className="relative">
-            <WifiOff className="w-5 h-5 text-slate-600 hover:text-emerald-700" />
-            {offlineBookings.length > 0 && (
-              <span className="absolute -top-1 -right-2 bg-emerald-600 text-white text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center shadow-xs">
-                {offlineBookings.length}
-              </span>
-            )}
+          <div className={`w-7 h-7 rounded-full flex items-center justify-center ${
+            activeTab === 'host' ? 'bg-emerald-700 text-white shadow-xs' : 'bg-slate-100 text-slate-700'
+          }`}>
+            <Building2 className="w-3.5 h-3.5 text-amber-400" />
           </div>
-          <span className="text-[10px] mt-0.5">أوفلاين</span>
+          <span className="text-[10px] mt-0.5 font-bold">بوابة المضيف</span>
+          {activeTab === 'host' && (
+            <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full mt-0.5"></span>
+          )}
         </button>
 
         {/* Tab 5: Favorites */}

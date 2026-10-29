@@ -9,7 +9,8 @@ import {
   Compass,
   Map,
   WifiOff,
-  Building2
+  Building2,
+  Bell
 } from 'lucide-react';
 import { SeyranBrandLogo } from './SeyranBrandLogo';
 
@@ -28,7 +29,9 @@ export const Header: React.FC = () => {
     setActiveTab,
     properties,
     setIsOfflineModalOpen,
-    offlineBookings
+    offlineBookings,
+    unreadNotificationCount,
+    setIsNotificationOpen
   } = useApp();
 
   const damascusHotelsCount = properties.filter(p => p.governorate === 'دمشق' && p.type === 'hotel').length;
@@ -91,6 +94,18 @@ export const Header: React.FC = () => {
               <Map className="w-3.5 h-3.5" />
               <span>الخريطة التفاعلية</span>
             </button>
+
+            <button
+              onClick={() => setActiveTab('host')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'host'
+                  ? 'bg-emerald-700 text-white shadow-xs font-black'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Building2 className="w-3.5 h-3.5 text-amber-300" />
+              <span>بوابة المضيفين</span>
+            </button>
           </nav>
 
           {/* Actions & Controls */}
@@ -137,6 +152,20 @@ export const Header: React.FC = () => {
               </button>
             </div>
 
+            {/* Notification Center Bell */}
+            <button
+              onClick={() => setIsNotificationOpen(true)}
+              className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
+              title="مركز الإشعارات والتنبيهات المباشرة"
+            >
+              <Bell className="w-4 h-4 text-emerald-800" />
+              {unreadNotificationCount > 0 && (
+                <span className="absolute -top-1 -left-1 bg-amber-500 text-slate-950 text-[9px] sm:text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-xs animate-pulse">
+                  {unreadNotificationCount}
+                </span>
+              )}
+            </button>
+
             {/* Offline Emergency Voucher Button */}
             <button
               onClick={() => setIsOfflineModalOpen(true)}
@@ -167,7 +196,7 @@ export const Header: React.FC = () => {
 
             {/* Host & Hotel Portal Button */}
             <button
-              onClick={() => setIsAddPropertyOpen(true)}
+              onClick={() => setActiveTab('host')}
               className="hidden sm:flex items-center gap-1.5 bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white px-3 py-2 sm:px-3.5 sm:py-2 rounded-xl text-xs sm:text-sm font-black shadow-md shadow-emerald-700/20 transition-all hover:shadow-lg active:scale-95 flex-shrink-0 border border-emerald-600/30"
               title="بوابة المضيفين وأصحاب الفنادق والمزارع"
             >
