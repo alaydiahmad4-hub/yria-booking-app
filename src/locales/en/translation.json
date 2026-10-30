@@ -1,0 +1,79 @@
+{
+  "brand": {
+    "name": "Seyran Syria",
+    "tagline": "The Premier Syrian Platform for Chalets, Country Farms & Heritage Hotels"
+  },
+  "nav": {
+    "explore": "Explore & Stays",
+    "hotels": "Damascus Hotels",
+    "map": "Interactive Map",
+    "host": "Syrian Host Portal",
+    "favorites": "Favorites",
+    "notifications": "Notifications",
+    "addProperty": "List Your Property",
+    "offlineMode": "Emergency Offline Mode",
+    "genius": "Genius Rewards"
+  },
+  "common": {
+    "currencyUsd": "US Dollar ($)",
+    "currencySyp": "Syrian Pound (SYP)",
+    "language": "Language",
+    "arabic": "العربية",
+    "english": "English",
+    "search": "Search",
+    "searchPlaceholder": "Search city, district, or property name...",
+    "all": "All",
+    "close": "Close",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "save": "Save",
+    "loading": "Loading...",
+    "details": "Details",
+    "bookNow": "Book Now",
+    "instantBooking": "Instant Booking",
+    "verified": "Field Verified",
+    "solarEnergy": "24/7 Solar Lithium Power",
+    "privatePool": "Private Sanitized Pool",
+    "night": "night",
+    "person": "person",
+    "guests": "guests",
+    "bedrooms": "bedrooms",
+    "bathrooms": "bathrooms",
+    "governorate": "Governorate",
+    "priceRange": "Price Range",
+    "filters": "Advanced Filters",
+    "resetFilters": "Reset Filters",
+    "escrowBadge": "Seyran Escrow: 25% Deposit Protected Until Check-in",
+    "viewOnMap": "View on Map",
+    "gridView": "Grid View"
+  },
+  "host": {
+    "portalTitle": "Syrian Host Portal",
+    "portalSubtitle": "Manage properties, incoming guest reservations and escrow payouts",
+    "totalEarnings": "Total Earnings",
+    "activeBookings": "Active Bookings",
+    "listedProperties": "Listed Properties",
+    "escrowPending": "Escrow in Progress",
+    "addNewListing": "Add New Property",
+    "myListings": "My Listings",
+    "incomingBookings": "Incoming Bookings"
+  },
+  "notifications": {
+    "title": "Notifications & Alerts",
+    "subtitle": "Real-time booking updates, SMS confirmations, and WhatsApp concierge",
+    "markAllRead": "Mark all as read",
+    "all": "All Alerts",
+    "booking": "Bookings & SMS",
+    "system": "System Updates",
+    "empty": "No notifications right now",
+    "viewVoucher": "View Booking Voucher"
+  },
+  "sms": {
+    "title": "SMS Booking Confirmation",
+    "subtitle": "Works offline even during internet disruptions or poor fiber connectivity",
+    "code": "Official Confirmation Code",
+    "copyCode": "Copy Code",
+    "copied": "Code copied successfully!",
+    "status": "Message status: Delivered via Syriatel / MTN network"
+  }
+}

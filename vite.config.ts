@@ -13,28 +13,11 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // Split vendor libraries and heavy UI sections
+        // Chunk splitting for optimal loading performance
         manualChunks: {
-          // third‑party libraries
-          vendor: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
-          // heavy UI components
-          hostPortal: ['src/components/HostPortalPage.tsx'],
-          notificationCenter: ['src/components/NotificationCenterModal.tsx'],
-          interactiveMap: ['src/components/InteractiveMap.tsx'],
+          vendor: ['react', 'react-dom', 'lucide-react', 'i18next', 'react-i18next'],
         },
       },
     },
   },
-})
-import react from '@vitejs/plugin-react'
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  base: './',
-  plugins: [react()],
-  server: {
-    port: 3000,
-    host: '0.0.0.0',
-    open: false
-  }
 })

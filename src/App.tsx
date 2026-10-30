@@ -3,7 +3,6 @@ import { Header } from './components/Header';
 import { HeroSearch } from './components/HeroSearch';
 import { CategoryBar } from './components/CategoryBar';
 import { PropertyCard } from './components/PropertyCard';
-import { InteractiveMap } from './components/InteractiveMap';
 import { DamascusHotelsSection } from './components/DamascusHotelsSection';
 import { BottomNavBar } from './components/BottomNavBar';
 import { PropertyDetailsModal } from './components/PropertyDetailsModal';
@@ -17,12 +16,7 @@ import { VoucherModal } from './components/VoucherModal';
 import { PhotoLightboxModal } from './components/PhotoLightboxModal';
 import { SplitBillModal } from './components/SplitBillModal';
 import { GeniusLoyaltyModal } from './components/GeniusLoyaltyModal';
-// Lazy loaded heavy UI components
-const HostPortalPage = lazy(() => import('./components/HostPortalPage'));
-const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal'));
-const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal'));
-
-import { AdminDashboard } from './components/AdminDashboard';
+import { BrandHeritageModal } from './components/BrandHeritageModal';
 import { Footer } from './components/Footer';
 import { SyrianSectionsGrid } from './components/SyrianSectionsGrid';
 import { SyrianMarketShowcase } from './components/SyrianMarketShowcase';
@@ -41,10 +35,19 @@ import {
   ChevronLeft
 } from 'lucide-react';
 
-// Lazy load heavy UI components
-const HostPortalPage = lazy(() => import('./components/HostPortalPage'));
-const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal'));
-const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal'));
+// Skeletons for Shimmer Fallbacks
+import { HostPortalSkeleton } from './components/skeletons/HostPortalSkeleton';
+import { NotificationCenterSkeleton } from './components/skeletons/NotificationCenterSkeleton';
+import { SmsConfirmationSkeleton } from './components/skeletons/SmsConfirmationSkeleton';
+import { InteractiveMapSkeleton } from './components/skeletons/InteractiveMapSkeleton';
+import { ModalFallbackSkeleton } from './components/skeletons/ModalFallbackSkeleton';
+
+// Lazy Loaded Heavy UI Components (with explicit named export mappings)
+const HostPortalPage = lazy(() => import('./components/HostPortalPage').then(m => ({ default: m.HostPortalPage })));
+const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal').then(m => ({ default: m.NotificationCenterModal })));
+const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal').then(m => ({ default: m.SmsConfirmationModal })));
+const InteractiveMap = lazy(() => import('./components/InteractiveMap').then(m => ({ default: m.InteractiveMap })));
+const AdminDashboard = lazy(() => import('./components/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 
 export const MainContent: React.FC = () => {
   const { 
@@ -56,78 +59,6 @@ export const MainContent: React.FC = () => {
     onlySolar, 
     onlyPool, 
     onlySuperhost, 
-    advancedFilters,
-    setSelectedGovernorate,
-    setSelectedType,
-    setSearchQuery,
-    setOnlySolar,
-    setOnlyPool,
-    setOnlySuperhost,
-    setAdvancedFilters,
-    isAdminMode,
-    activeTab,
-    setActiveTab,
-    syrianSpecialCategory,
-    setSyrianSpecialCategory
-  } = useApp();
-
-  // ...rest of component unchanged
-});
-import { Header } from './components/Header';
-import { HeroSearch } from './components/HeroSearch';
-import { CategoryBar } from './components/CategoryBar';
-import { PropertyCard } from './components/PropertyCard';
-import { InteractiveMap } from './components/InteractiveMap';
-import { DamascusHotelsSection } from './components/DamascusHotelsSection';
-import { BottomNavBar } from './components/BottomNavBar';
-import { PropertyDetailsModal } from './components/PropertyDetailsModal';
-import { BookingModal } from './components/BookingModal';
-import { HostModal } from './components/HostModal';
-import { FavoritesModal } from './components/FavoritesModal';
-import { AdvancedFilterModal } from './components/AdvancedFilterModal';
-import { ReviewsModal } from './components/ReviewsModal';
-import { ComparisonModal } from './components/ComparisonModal';
-import { VoucherModal } from './components/VoucherModal';
-import { PhotoLightboxModal } from './components/PhotoLightboxModal';
-import { SplitBillModal } from './components/SplitBillModal';
-import { GeniusLoyaltyModal } from './components/GeniusLoyaltyModal';
-// Lazy loaded heavy UI components
-const HostPortalPage = lazy(() => import('./components/HostPortalPage'));
-const NotificationCenterModal = lazy(() => import('./components/NotificationCenterModal'));
-const SmsConfirmationModal = lazy(() => import('./components/SmsConfirmationModal'));
-
-import { AdminDashboard } from './components/AdminDashboard';
-import { Footer } from './components/Footer';
-import { SyrianSectionsGrid } from './components/SyrianSectionsGrid';
-import { SyrianMarketShowcase } from './components/SyrianMarketShowcase';
-import { SyrianMarketNeedsModal } from './components/SyrianMarketNeedsModal';
-import { OfflineEmergencyModal } from './components/OfflineEmergencyModal';
-import { WhatsAppSupportFAB } from './components/WhatsAppSupportFAB';
-import { HostPortalPage } from './components/HostPortalPage';
-import { NotificationCenterModal } from './components/NotificationCenterModal';
-import { SmsConfirmationModal } from './components/SmsConfirmationModal';
-import { useApp } from './context/AppContext';
-import { 
-  Sparkles, 
-  AlertCircle, 
-  RefreshCw, 
-  Hotel, 
-  ArrowLeft, 
-  Building2, 
-  Award,
-  ChevronLeft
-} from 'lucide-react';
-
-export const MainContent: React.FC = () => {
-  const { 
-    properties, 
-    viewMode,
-    selectedGovernorate, 
-    selectedType, 
-    searchQuery, 
-    onlySolar, 
-    onlyPool, 
-    onlySuperhost,
     advancedFilters,
     setSelectedGovernorate,
     setSelectedType,
@@ -179,7 +110,7 @@ export const MainContent: React.FC = () => {
       const isCentralDamascus = prop.governorate === 'دمشق' && (
         prop.area.includes('المزة') || 
         prop.area.includes('الصالحية') || 
-        prop.area.includes('الشعلان') ||
+        prop.area.includes('الشعلان') || 
         prop.area.includes('الأمويين') || 
         prop.area.includes('أبو رمانة') || 
         prop.area.includes('كفرسوسة')
@@ -285,7 +216,11 @@ export const MainContent: React.FC = () => {
   };
 
   if (isAdminMode) {
-    return <AdminDashboard />;
+    return (
+      <Suspense fallback={<ModalFallbackSkeleton />}>
+        <AdminDashboard />
+      </Suspense>
+    );
   }
 
   return (
@@ -319,18 +254,22 @@ export const MainContent: React.FC = () => {
               <span>فنادق دمشق</span>
             </button>
           </div>
-          <InteractiveMap properties={properties} />
+          <Suspense fallback={<InteractiveMapSkeleton />}>
+            <InteractiveMap properties={properties} />
+          </Suspense>
         </main>
       )}
 
-      {/* Sub-page 4: Dedicated Syrian Host Portal */}
+      {/* Sub-page 3: Dedicated Syrian Host Portal */}
       {activeTab === 'host' && (
         <main className="flex-1 animate-fadeIn">
-          <HostPortalPage />
+          <Suspense fallback={<HostPortalSkeleton />}>
+            <HostPortalPage />
+          </Suspense>
         </main>
       )}
 
-      {/* Sub-page 3: Main Explore & Stays Page */}
+      {/* Sub-page 4: Main Explore & Stays Page */}
       {activeTab === 'explore' && (
         <>
           <HeroSearch />
@@ -338,7 +277,7 @@ export const MainContent: React.FC = () => {
           {/* Syrian 4 Primary Sections Grid: Hotels, Farms, Chalets, Apartments */}
           <SyrianSectionsGrid />
 
-          {/* Syrian Market Specialized Pillars: Gifting family, Day-Use, Medical/Embassy, Honeymoon, Remote Work */}
+          {/* Syrian Market Specialized Pillars */}
           <SyrianMarketShowcase />
 
           {/* Featured Damascus Hotels Section Callout Banner */}
@@ -443,10 +382,10 @@ export const MainContent: React.FC = () => {
               </div>
             )}
 
-            {/* Results Header */}
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+            {/* Results Header Info & Reset */}
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+                <h2 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
                   <span>الإقامات المتاحة للحجز</span>
                   {selectedGovernorate !== 'الكل' && (
                     <span className="text-emerald-700 text-sm font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
@@ -471,7 +410,9 @@ export const MainContent: React.FC = () => {
             {/* View Mode Switch: Map or Grid */}
             {viewMode === 'map' ? (
               <div className="space-y-4">
-                <InteractiveMap properties={filteredProperties} />
+                <Suspense fallback={<InteractiveMapSkeleton />}>
+                  <InteractiveMap properties={filteredProperties} />
+                </Suspense>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
                   {filteredProperties.slice(0, 4).map((prop) => (
                     <PropertyCard key={prop.id} property={prop} />
@@ -532,8 +473,15 @@ export const MainContent: React.FC = () => {
       <BrandHeritageModal />
       <SyrianMarketNeedsModal />
       <OfflineEmergencyModal />
-      <NotificationCenterModal />
-      <SmsConfirmationModal />
+
+      {/* Lazy Loaded Modals with Shimmer Fallbacks */}
+      <Suspense fallback={<NotificationCenterSkeleton />}>
+        <NotificationCenterModal />
+      </Suspense>
+
+      <Suspense fallback={<SmsConfirmationSkeleton />}>
+        <SmsConfirmationModal />
+      </Suspense>
     </div>
   );
 };

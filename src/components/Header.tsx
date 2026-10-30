@@ -1,8 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useApp } from '../context/AppContext';
 import { 
   Heart, 
-  PlusCircle, 
   Search, 
   Crown,
   Hotel,
@@ -10,19 +10,18 @@ import {
   Map,
   WifiOff,
   Building2,
-  Bell
+  Bell,
+  Globe
 } from 'lucide-react';
 import { SeyranBrandLogo } from './SeyranBrandLogo';
 
 export const Header: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const { 
     currency, 
     setCurrency, 
     favorites, 
     setIsFavoritesModalOpen, 
-    setIsAddPropertyOpen,
-    searchQuery,
-    setSearchQuery,
     geniusTier,
     setIsGeniusModalOpen,
     activeTab,
@@ -35,6 +34,11 @@ export const Header: React.FC = () => {
   } = useApp();
 
   const damascusHotelsCount = properties.filter(p => p.governorate === 'دمشق' && p.type === 'hotel').length;
+
+  const toggleLanguage = () => {
+    const nextLang = i18n.language === 'ar' ? 'en' : 'ar';
+    i18n.changeLanguage(nextLang);
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs transition-all w-full overflow-hidden">
@@ -63,7 +67,7 @@ export const Header: React.FC = () => {
               }`}
             >
               <Compass className="w-3.5 h-3.5" />
-              <span>الرئيسية والاستكشاف</span>
+              <span>{t('nav.explore', 'الرئيسية والاستكشاف')}</span>
             </button>
 
             <button
@@ -75,7 +79,7 @@ export const Header: React.FC = () => {
               }`}
             >
               <Hotel className="w-3.5 h-3.5" />
-              <span>فنادق دمشق</span>
+              <span>{t('nav.hotels', 'فنادق دمشق')}</span>
               <span className={`text-[10px] font-black px-1.5 py-0.2 rounded-full ${
                 activeTab === 'hotels' ? 'bg-amber-400 text-slate-950' : 'bg-emerald-100 text-emerald-800'
               }`}>
@@ -92,7 +96,7 @@ export const Header: React.FC = () => {
               }`}
             >
               <Map className="w-3.5 h-3.5" />
-              <span>الخريطة التفاعلية</span>
+              <span>{t('nav.map', 'الخريطة التفاعلية')}</span>
             </button>
 
             <button
@@ -104,13 +108,26 @@ export const Header: React.FC = () => {
               }`}
             >
               <Building2 className="w-3.5 h-3.5 text-amber-300" />
-              <span>بوابة المضيفين</span>
+              <span>{t('nav.host', 'بوابة المضيفين')}</span>
             </button>
           </nav>
 
           {/* Actions & Controls */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             
+            {/* Language Switcher (AR / EN) */}
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 px-2 py-1.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 text-[11px] sm:text-xs font-bold transition-all shadow-2xs"
+              title={i18n.language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
+            >
+              <Globe className="w-3.5 h-3.5 text-emerald-700" />
+              <span className="font-black text-emerald-800">
+                {i18n.language === 'ar' ? 'EN' : 'عربي'}
+              </span>
+            </button>
+
             {/* Genius Loyalty Badge */}
             <button
               onClick={() => setIsGeniusModalOpen(true)}
@@ -155,6 +172,7 @@ export const Header: React.FC = () => {
             {/* Notification Center Bell */}
             <button
               onClick={() => setIsNotificationOpen(true)}
+              aria-label="مركز الإشعارات والتنبيهات المباشرة"
               className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
               title="مركز الإشعارات والتنبيهات المباشرة"
             >
@@ -169,6 +187,7 @@ export const Header: React.FC = () => {
             {/* Offline Emergency Voucher Button */}
             <button
               onClick={() => setIsOfflineModalOpen(true)}
+              aria-label="سند الطوارئ والحجوزات بدون إنترنت"
               className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
               title="سند الطوارئ والحجوزات بدون إنترنت (Offline Mode)"
             >
@@ -183,6 +202,7 @@ export const Header: React.FC = () => {
             {/* Favorites Wishlist */}
             <button
               onClick={() => setIsFavoritesModalOpen(true)}
+              aria-label="المفضلة"
               className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/40 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
               title="المفضلة"
             >
@@ -201,7 +221,7 @@ export const Header: React.FC = () => {
               title="بوابة المضيفين وأصحاب الفنادق والمزارع"
             >
               <Building2 className="w-4 h-4 text-amber-300" />
-              <span>بوابة المضيفين</span>
+              <span>{t('nav.host', 'بوابة المضيفين')}</span>
             </button>
 
           </div>
