@@ -28,7 +28,7 @@ export const SyrianSectionsGrid: React.FC = () => {
       priceRangeUsd: '$50 - $180',
       priceRangeSyp: '725,000 - 2,610,000 ل.س',
       areas: ['دمشق القديمة (باب توما والقيمرية)', 'ساحة الأمويين', 'شارع الصالحية', 'اللاذقية', 'حلب'],
-      image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
       icon: Hotel,
       badge: '5 نجوم وتراثي',
       color: 'from-amber-600 to-amber-800',

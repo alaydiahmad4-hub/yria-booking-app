@@ -34,7 +34,8 @@ export const VoucherModal: React.FC = () => {
     properties,
     formatPrice,
     setIsOfflineModalOpen,
-    saveBookingOffline
+    saveBookingOffline,
+    sypExchangeRate
   } = useApp();
 
   const [savedOffline, setSavedOffline] = useState(false);
@@ -62,9 +63,9 @@ export const VoucherModal: React.FC = () => {
   };
 
   const depositUsd = latestConfirmedBooking.depositUsd || Math.round(latestConfirmedBooking.totalPriceUsd * 0.25);
-  const depositSyp = Math.round(depositUsd * SYP_PER_USD);
+  const depositSyp = Math.round(depositUsd * (sypExchangeRate || 14800));
   const remainingUsd = latestConfirmedBooking.totalPriceUsd - depositUsd;
-  const remainingSyp = Math.round(remainingUsd * SYP_PER_USD);
+  const remainingSyp = Math.round(remainingUsd * (sypExchangeRate || 14800));
 
   const shareWhatsApp = () => {
     const text = encodeURIComponent(
@@ -75,7 +76,7 @@ export const VoucherModal: React.FC = () => {
       `📱 *الهاتف:* ${latestConfirmedBooking.guestPhone}\n` +
       `📅 *تسجيل الوصول:* ${latestConfirmedBooking.checkIn} (02:00 م)\n` +
       `📅 *تسجيل المغادرة:* ${latestConfirmedBooking.checkOut} (12:00 ظهراً)\n` +
-      `💰 *المبلغ الإجمالي:* $${latestConfirmedBooking.totalPriceUsd} USD (${(latestConfirmedBooking.totalPriceSyp || latestConfirmedBooking.totalPriceUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س)\n` +
+      `💰 *المبلغ الإجمالي:* $${latestConfirmedBooking.totalPriceUsd} USD (${(latestConfirmedBooking.totalPriceSyp || latestConfirmedBooking.totalPriceUsd * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س)\n` +
       `🛡️ *عربون الضمان (المسدد بنظام Escrow):* $${depositUsd} USD (${depositSyp.toLocaleString('ar-SY')} ل.س)\n` +
       `💵 *المتبقي عند الوصول:* $${remainingUsd} USD (${remainingSyp.toLocaleString('ar-SY')} ل.س)\n` +
       (latestConfirmedBooking.isFamilyGift ? `🎁 *ملاحظة:* الحجز هدية عائلية مرسلة للأهل في سوريا باسم (${latestConfirmedBooking.recipientName})\n` : '') +
@@ -244,7 +245,7 @@ export const VoucherModal: React.FC = () => {
               <div className="text-left font-mono" dir="ltr">
                 <span className="text-emerald-700 font-black">${latestConfirmedBooking.totalPriceUsd} USD</span>
                 <span className="text-[11px] text-slate-500 block font-normal" dir="rtl">
-                  ({(latestConfirmedBooking.totalPriceSyp || latestConfirmedBooking.totalPriceUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س)
+                  ({(latestConfirmedBooking.totalPriceSyp || latestConfirmedBooking.totalPriceUsd * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س)
                 </span>
               </div>
             </div>

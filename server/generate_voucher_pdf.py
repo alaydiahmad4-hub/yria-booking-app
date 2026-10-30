@@ -283,7 +283,7 @@ def generate_pdf(booking: dict, property_info: dict, output_path: str):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        page.set_content(html_content, wait_until="load", timeout=10000)
+        page.set_content(html_content, wait_until="domcontentloaded", timeout=15000)
         pdf_bytes = page.pdf(format="A4", print_background=True)
         browser.close()
     

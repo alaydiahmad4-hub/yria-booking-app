@@ -52,7 +52,8 @@ export const PropertyDetailsModal: React.FC = () => {
     getFrozenPrice,
     setSelectedRoomId,
     openChatWithProperty,
-    addNotification
+    addNotification,
+    sypExchangeRate
   } = useApp();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -413,7 +414,7 @@ export const PropertyDetailsModal: React.FC = () => {
                     {selectedProperty.roomOptions.length} فئات غرف متاحة
                   </span>
                   <span className="text-[11px] bg-slate-100 text-slate-700 font-bold px-2.5 py-1 rounded-full">
-                    1 USD = {SYP_PER_USD.toLocaleString('ar-SY')} ل.س
+                    1 USD = {(sypExchangeRate || 14800).toLocaleString('ar-SY')} ل.س
                   </span>
                 </div>
               </div>
@@ -421,7 +422,7 @@ export const PropertyDetailsModal: React.FC = () => {
               {/* Room Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                 {selectedProperty.roomOptions.map((room) => {
-                  const sypPrice = Math.round(room.pricePerNightUsd * SYP_PER_USD);
+                  const sypPrice = Math.round(room.pricePerNightUsd * (sypExchangeRate || 14800));
                   const roomImg = room.image || selectedProperty.images[0];
 
                   return (

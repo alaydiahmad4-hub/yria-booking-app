@@ -23,7 +23,8 @@ export const SplitBillModal: React.FC = () => {
     formatPrice,
     currency,
     setIsBookingOpen,
-    setSelectedProperty
+    setSelectedProperty,
+    sypExchangeRate
   } = useApp();
 
   const [peopleCount, setPeopleCount] = useState<number>(6);
@@ -40,7 +41,7 @@ export const SplitBillModal: React.FC = () => {
   const grandTotalUsd = rentTotalUsd + foodTotalUsd;
 
   const perPersonUsd = Math.round((grandTotalUsd / peopleCount) * 10) / 10;
-  const perPersonSyp = Math.round((perPersonUsd * SYP_PER_USD) / 1000) * 1000;
+  const perPersonSyp = Math.round((perPersonUsd * (sypExchangeRate || 14800)) / 1000) * 1000;
 
   // Formatted message for WhatsApp
   const generateWhatsAppMessage = () => {
@@ -52,8 +53,8 @@ export const SplitBillModal: React.FC = () => {
 🏊 المسبح: ${splitPayProperty.hasPool ? 'مسبح خاص معقم' : 'غير متوفر'}
 
 💰 *تفاصيل القطة وحصة كل شخص:*
-💵 إجمالي إيجار المزرعة: $${rentTotalUsd} (${(rentTotalUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س)
-${includeFoodBudget ? `🍖 تقدير المشاوي والمشروبات: $${foodTotalUsd} (${(foodTotalUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س)\n` : ''}
+💵 إجمالي إيجار المزرعة: $${rentTotalUsd} (${(rentTotalUsd * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س)
+${includeFoodBudget ? `🍖 تقدير المشاوي والمشروبات: $${foodTotalUsd} (${(foodTotalUsd * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س)\n` : ''}
 🔥 *حصة كل شخص الصافية:*
 👉 *$${perPersonUsd} دولار* فقط أو *${perPersonSyp.toLocaleString('ar-SY')} ل.س*!
 
@@ -193,7 +194,7 @@ https://seyransyria.com/p/${splitPayProperty.id}`;
             {includeFoodBudget && (
               <div className="text-xs text-slate-600 flex items-center justify-between mt-2 pt-2 border-t border-emerald-200/50">
                 <span>معدل تكلفة الأكل للشخص الواحد:</span>
-                <span className="font-bold text-slate-900">${foodBudgetPerPersonUsd} (~{(foodBudgetPerPersonUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س)</span>
+                <span className="font-bold text-slate-900">${foodBudgetPerPersonUsd} (~{(foodBudgetPerPersonUsd * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س)</span>
               </div>
             )}
           </div>

@@ -90,9 +90,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.1400
     },
     images: [
-      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 3,
     bathrooms: 3,
@@ -171,8 +171,8 @@ export const MOCK_PROPERTIES: Property[] = [
     },
     images: [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 2,
     bathrooms: 2,
@@ -249,9 +249,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.0000
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 2,
     bathrooms: 1,
@@ -312,9 +312,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3130
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 2,
     bathrooms: 2,
@@ -377,9 +377,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 35.7901
     },
     images: [
-      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 4,
     bathrooms: 3,
@@ -445,8 +445,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 37.1343
     },
     images: [
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 2,
     bathrooms: 2,
@@ -507,8 +508,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2300
     },
     images: [
-      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 3,
     bathrooms: 2,
@@ -567,8 +569,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2950
     },
     images: [
-      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -669,9 +672,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 35.7400
     },
     images: [
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 2,
     bathrooms: 2,
@@ -773,9 +776,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3120
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 2,
     bathrooms: 2,
@@ -872,9 +875,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2917
     },
     images: [
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -913,7 +917,7 @@ export const MOCK_PROPERTIES: Property[] = [
         availableRoomsCount: 3,
         amenities: ['بوفيه إفطار عالمي مفتوح', 'حمام رخامي إيطالي وحوض استحمام', 'خدمة الكونسيرج 24 ساعة']
         ,
-        image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=800&q=80',
       },
       {
         id: 'r-fs-suite',
@@ -982,9 +986,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2730
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1023,7 +1028,7 @@ export const MOCK_PROPERTIES: Property[] = [
         availableRoomsCount: 4,
         amenities: ['إفطار بوفيه شامي مفتوح', 'مكتب عمل وشاشة ذكية', 'ماكينة قهوة وشاي']
         ,
-        image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80',
       },
       {
         id: 'r-sheraton-diplomatic',
@@ -1037,7 +1042,7 @@ export const MOCK_PROPERTIES: Property[] = [
         availableRoomsCount: 2,
         amenities: ['ميني بار مجاني', 'دخول صالة كبار الشخصيات Executive Lounge', 'خدمة غسيل وكي ملابس سريعة']
         ,
-        image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80',
       }
     ],
     amenities: [
@@ -1092,9 +1097,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3150
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1128,7 +1134,7 @@ export const MOCK_PROPERTIES: Property[] = [
         availableRoomsCount: 1,
         amenities: ['فطور شامي أصيل مع فتة بالسمنة والمربيات الدمشقية', 'حمام شامي تقليدي من الرخام الأصيل', 'قهوة عربية وضيافة راحة الحلقوم']
         ,
-        image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
       },
       {
         id: 'r-mamlouka-durr',
@@ -1197,9 +1203,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3180
     },
     images: [
+      'https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1233,7 +1240,7 @@ export const MOCK_PROPERTIES: Property[] = [
         availableRoomsCount: 1,
         amenities: ['إفطار شامي ملكي متعدد الأصناف', 'حمام رخامي واسع مع جاكوزي', 'شاي شامي وحلويات دمشقية']
         ,
-        image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
       },
       {
         id: 'r-wali-jasmine',
@@ -1302,9 +1309,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2905
     },
     images: [
-      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1398,9 +1406,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2965
     },
     images: [
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1488,9 +1497,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3130
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1529,7 +1539,7 @@ export const MOCK_PROPERTIES: Property[] = [
         availableRoomsCount: 2,
         amenities: ['إفطار دمشقي استثنائي بجانب المسبح', 'حمام رخامي تاريخي', 'هدوء تام وعزل صوتي كامل']
         ,
-        image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
       },
       {
         id: 'r-talisman-standard',
@@ -1597,9 +1607,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3850
     },
     images: [
+      'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1706,9 +1717,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2940
     },
     images: [
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1791,9 +1802,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2900
     },
     images: [
+      'https://images.unsplash.com/photo-1590490359683-658d3d23f972?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1876,9 +1887,10 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3150
     },
     images: [
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -1980,9 +1992,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3090
     },
     images: [
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2065,9 +2077,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2860
     },
     images: [
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2150,8 +2162,8 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2970
     },
     images: [
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
@@ -2235,9 +2247,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3170
     },
     images: [
-      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1578895101408-1a36b834405b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2320,9 +2332,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2750
     },
     images: [
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2406,8 +2418,8 @@ export const MOCK_PROPERTIES: Property[] = [
     },
     images: [
       'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2504,9 +2516,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.3160
     },
     images: [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2608,9 +2620,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2915
     },
     images: [
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2693,9 +2705,9 @@ export const MOCK_PROPERTIES: Property[] = [
       lng: 36.2955
     },
     images: [
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80'
     ],
     bedrooms: 1,
     bathrooms: 1,
@@ -2775,10 +2787,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.142
   },
   "images": [
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 4,
   "bathrooms": 4,
   "maxGuests": 16,
@@ -2797,35 +2809,6 @@ export const MOCK_PROPERTIES: Property[] = [
     "hasPrivacyScreen": true
   },
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "مسبح إنفينيتي خاص",
     "سواتر خصوصية 100%",
@@ -2884,10 +2867,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.255
   },
   "images": [
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 3,
   "bathrooms": 2,
   "maxGuests": 12,
@@ -2906,35 +2889,6 @@ export const MOCK_PROPERTIES: Property[] = [
     "hasPrivacyScreen": true
   },
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "مسبح مغلق دافئ",
     "خصوصية عائلية تامة",
@@ -2985,10 +2939,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.38
   },
   "images": [
-    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 3,
   "bathrooms": 2,
   "maxGuests": 14,
@@ -3006,35 +2960,6 @@ export const MOCK_PROPERTIES: Property[] = [
     "hasPrivacyScreen": true
   },
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "مسبح خاص عائلي",
     "أشجار فواكه وبساتين",
@@ -3083,10 +3008,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.1
   },
   "images": [
-    "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 3,
   "bathrooms": 3,
   "maxGuests": 12,
@@ -3105,35 +3030,6 @@ export const MOCK_PROPERTIES: Property[] = [
     "hasPrivacyScreen": true
   },
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "مسبح بانورامي خاص",
     "سواتر خصوصية 100%",
@@ -3183,10 +3079,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.21
   },
   "images": [
-    "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 2,
   "maxGuests": 10,
@@ -3204,35 +3100,6 @@ export const MOCK_PROPERTIES: Property[] = [
     "hasPrivacyScreen": true
   },
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "مسبح خاص معقم",
     "سواتر خصوصية عائلية",
@@ -3280,10 +3147,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 35.882
   },
   "images": [
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 2,
   "maxGuests": 6,
@@ -3379,10 +3246,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 35.857
   },
   "images": [
-    "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 1,
   "maxGuests": 5,
@@ -3395,35 +3262,6 @@ export const MOCK_PROPERTIES: Property[] = [
   "hasWifi": true,
   "hasPool": false,
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "إطلالة مباشرة على البحر",
     "خدمة نقل بالقارب السريع",
@@ -3470,10 +3308,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 35.84
   },
   "images": [
-    "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 1,
   "maxGuests": 6,
@@ -3486,35 +3324,6 @@ export const MOCK_PROPERTIES: Property[] = [
   "hasWifi": true,
   "hasPool": false,
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "نزول مباشر للرمال والبحر",
     "طاقة شمسية 24/7",
@@ -3561,10 +3370,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.275
   },
   "images": [
-    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 3,
   "bathrooms": 2,
   "maxGuests": 6,
@@ -3578,35 +3387,6 @@ export const MOCK_PROPERTIES: Property[] = [
   "wifiSpeed": "فايبر نت فائق السرعة 40 ميغا",
   "hasPool": false,
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "صالون VIP فخم",
     "تكييف وإنفرتر 24/7",
@@ -3656,10 +3436,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.282
   },
   "images": [
-    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 3,
   "bathrooms": 2,
   "maxGuests": 7,
@@ -3723,10 +3503,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.248
   },
   "images": [
-    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 2,
   "maxGuests": 5,
@@ -3740,35 +3520,6 @@ export const MOCK_PROPERTIES: Property[] = [
   "wifiSpeed": "4G سيريتل سريع",
   "hasPool": false,
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "أثاث مودرن جديد بالكامل",
     "إنفرتر وطاقة 24 ساعة",
@@ -3815,10 +3566,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 36.27
   },
   "images": [
-    "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 1,
   "maxGuests": 4,
@@ -3832,35 +3583,6 @@ export const MOCK_PROPERTIES: Property[] = [
   "wifiSpeed": "فايبر نت 25 ميغا",
   "hasPool": false,
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "قرب المول والمطاعم",
     "مصعد كهربائي دائم",
@@ -3907,10 +3629,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 35.875
   },
   "images": [
-    "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 2,
   "bathrooms": 1,
   "maxGuests": 5,
@@ -3923,35 +3645,6 @@ export const MOCK_PROPERTIES: Property[] = [
   "hasWifi": true,
   "hasPool": false,
   "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-
   "amenities": [
     "واجهة بحرية بانورامية",
     "طاقة شمسية مدار الساعة",
@@ -4001,10 +3694,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 35.881
   },
   "images": [
-    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 1,
   "bathrooms": 1,
   "maxGuests": 3,
@@ -4022,36 +3715,7 @@ export const MOCK_PROPERTIES: Property[] = [
     "isIndoor": true,
     "hasPrivacyScreen": false
   },
-  "hasWaterReserve": true,
-  "roomOptions": [
-    {
-      "id": "r-pt-deluxe",
-      "name": "غرفة ديلوكس بإطلالة بانورامية على مارينا اليخوت",
-      "bedType": "1 سرير كينغ ملكي كبير",
-      "maxGuests": 2,
-      "pricePerNightUsd": 110,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة مباشرة على مارينا اليخوت والبحر",
-      "availableRoomsCount": 3,
-      "amenities": ["شرفة بحرية خاصة", "بوفيه إفطار إنتركونتيننتال", "دخول الشاطئ والمسبح", "واي فاي فايبر"],
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "id": "r-pt-suite",
-      "name": "جناح بورتو الملكي مع صالون وشرفة شاطئية واسعة",
-      "bedType": "1 سرير كينغ + صالون كنب منفصل",
-      "maxGuests": 4,
-      "pricePerNightUsd": 185,
-      "freeBreakfast": true,
-      "freeCancellation": true,
-      "viewType": "إطلالة بحرية بانورامية مفتوحة 180 درجة",
-      "availableRoomsCount": 2,
-      "amenities": ["جاكوزي خاص", "بوفيه إفطار وعشاء", "خدمة كونسيرج خاصة", "ميني بار مجاني"],
-      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80"
-    }
-  ],
-  "specialSyrianFeatures": {
+  "hasWaterReserve": true,  "specialSyrianFeatures": {
     "isExpatFamilyGiftRecommended": true,
     "isHoneymoonSpecial": true
   },
@@ -4106,10 +3770,10 @@ export const MOCK_PROPERTIES: Property[] = [
     "lng": 37.145
   },
   "images": [
-    "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
-    "https://images.unsplash.com/photo-1590381105924-c72589b9ef3f?auto=format&fit=crop&w=1200&q=80"
-  ],
+      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&w=1200&q=80"
+    ],
   "bedrooms": 1,
   "bathrooms": 1,
   "maxGuests": 3,
@@ -4140,7 +3804,7 @@ export const MOCK_PROPERTIES: Property[] = [
       "viewType": "إطلالة على المسبح الخارجي والحدائق",
       "availableRoomsCount": 4,
       "amenities": ["بوفيه فطور حلبي وشامي", "دخول النادي الصحي", "شاشة 55 بوصة", "تكييف مركزي مستمر"],
-      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
+      "image": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80"
     },
     {
       "id": "r-aleppo-suite",

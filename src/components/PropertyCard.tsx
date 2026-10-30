@@ -31,7 +31,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     setSelectedProperty, 
     setIsReviewsModalOpen,
     isPriceFrozen,
-    getFrozenPrice
+    getFrozenPrice,
+    sypExchangeRate
   } = useApp();
 
   const favorited = isFavorite(property.id);
@@ -200,7 +201,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
               <span>(تقريباً:</span>
               <span className="text-emerald-700 font-extrabold">
                 {currency === 'USD' 
-                  ? `${Math.round(effectivePrice * SYP_PER_USD).toLocaleString('ar-SY')} ل.س`
+                  ? `${Math.round(effectivePrice * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س`
                   : `$${effectivePrice} USD`
                 }
               </span>
@@ -213,7 +214,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                 <span>نهاري: {formatPrice(property.dayUsePriceUsd)}</span>
                 <span className="text-slate-500 font-normal">
                   (≈ {currency === 'USD' 
-                    ? `${Math.round(property.dayUsePriceUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س` 
+                    ? `${Math.round(property.dayUsePriceUsd * (sypExchangeRate || 14800)).toLocaleString('ar-SY')} ل.س` 
                     : `$${property.dayUsePriceUsd}`})
                 </span>
               </div>

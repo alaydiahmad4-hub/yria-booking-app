@@ -15,6 +15,23 @@ const getBaseUrl = () => {
   return `http://${host}:5001/api`;
 };
 
+const getTimeoutSignal = (ms: number): AbortSignal | undefined => {
+  if (typeof globalThis !== 'undefined' && (globalThis as any).process?.env?.NODE_ENV === 'test') {
+    return undefined;
+  }
+  if (typeof AbortController === 'undefined') return undefined;
+  try {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+    if (typeof id === 'object' && id && 'unref' in id) {
+      (id as any).unref();
+    }
+    return controller.signal;
+  } catch {
+    return undefined;
+  }
+};
+
 const API_URL = getBaseUrl();
 
 export interface AuthUser {
@@ -43,7 +60,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, password }),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
       if (!res.ok) throw new Error('Login failed');
       const data = await res.json();
@@ -61,7 +78,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, name, password, role }),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
       if (!res.ok) throw new Error('Registration failed');
       const data = await res.json();
@@ -79,7 +96,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, name, otp }),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
       if (!res.ok) throw new Error('OTP Login failed');
       const data = await res.json();
@@ -97,7 +114,7 @@ export const api = {
     try {
       const res = await fetch(`${API_URL}/auth/me`, {
         headers: { 'Authorization': `Bearer ${token}` },
-        signal: AbortSignal.timeout(3000)
+        signal: getTimeoutSignal(3000)
       });
       if (!res.ok) return null;
       const data = await res.json();
@@ -111,7 +128,7 @@ export const api = {
   async getProperties(includeAll: boolean = false) {
     try {
       const res = await fetch(`${API_URL}/properties?all=${includeAll}`, {
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -127,7 +144,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(property),
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -143,7 +160,7 @@ export const api = {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -157,7 +174,7 @@ export const api = {
     try {
       const res = await fetch(`${API_URL}/properties/${id}`, {
         method: 'DELETE',
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -171,7 +188,7 @@ export const api = {
   async getBookings() {
     try {
       const res = await fetch(`${API_URL}/bookings`, {
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -191,7 +208,7 @@ export const api = {
         method: 'POST',
         headers,
         body: JSON.stringify(booking),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
 
       if (res.status === 409) {
@@ -225,7 +242,7 @@ export const api = {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updates),
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -239,7 +256,7 @@ export const api = {
   async getExchangeRate(): Promise<number> {
     try {
       const res = await fetch(`${API_URL}/settings/exchange-rate`, {
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('Failed to fetch exchange rate');
       const data = await res.json();
@@ -260,7 +277,7 @@ export const api = {
         method: 'POST',
         headers,
         body: JSON.stringify({ rate: Number(rate) }),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
 
       if (!res.ok) {
@@ -281,7 +298,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bookingId, reference, provider }),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
       if (!res.ok) throw new Error('Payment verification error');
       return await res.json();
@@ -297,7 +314,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ transactionId, bookingId, amountSyp, senderPhone, status: 'SUCCESS' }),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
       if (!res.ok) throw new Error('Syriatel webhook error');
       return await res.json();
@@ -311,7 +328,7 @@ export const api = {
   async getStats() {
     try {
       const res = await fetch(`${API_URL}/stats`, {
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -333,7 +350,7 @@ export const api = {
   async getChatMessages() {
     try {
       const res = await fetch(`${API_URL}/chat/messages`, {
-        signal: AbortSignal.timeout(2500)
+        signal: getTimeoutSignal(2500)
       });
       if (!res.ok) throw new Error('Chat API error');
       return await res.json();
@@ -355,7 +372,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-        signal: AbortSignal.timeout(4000)
+        signal: getTimeoutSignal(4000)
       });
       if (!res.ok) throw new Error('Chat API error');
       return await res.json();
@@ -369,7 +386,7 @@ export const api = {
     try {
       const res = await fetch(`${API_URL}/chat/messages`, {
         method: 'DELETE',
-        signal: AbortSignal.timeout(3000)
+        signal: getTimeoutSignal(3000)
       });
       if (!res.ok) throw new Error('Chat API error');
       return await res.json();

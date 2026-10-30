@@ -44,7 +44,8 @@ export const HostPortalPage: React.FC = () => {
     updatePropertyPrice,
     deletePropertyLocal,
     setActiveTab,
-    addNotification
+    addNotification,
+    sypExchangeRate
   } = useApp();
 
   const [activeHostTab, setActiveHostTab] = useState<'overview' | 'listings' | 'bookings' | 'wallet'>('overview');
@@ -61,16 +62,16 @@ export const HostPortalPage: React.FC = () => {
   // Calculate Host Financials
   const totalBookingsCount = bookings.length > 0 ? bookings.length : 12;
   const totalRevenueUsd = bookings.reduce((sum, b) => sum + (b.totalPriceUsd || 0), 0) || 2850;
-  const totalRevenueSyp = Math.round(totalRevenueUsd * SYP_PER_USD);
+  const totalRevenueSyp = Math.round(totalRevenueUsd * (sypExchangeRate || 14800));
   const availableBalanceUsd = Math.round(totalRevenueUsd * 0.85);
-  const availableBalanceSyp = Math.round(availableBalanceUsd * SYP_PER_USD);
+  const availableBalanceSyp = Math.round(availableBalanceUsd * (sypExchangeRate || 14800));
 
   const handleSavePrice = (propId: string) => {
     updatePropertyPrice(propId, tempPriceUsd);
     setEditingPriceId(null);
     addNotification({
       title: '💵 تحديث سعر الإقامة',
-      message: `تم تحديث سعر الليلة بنجاح إلى $${tempPriceUsd} (~${(tempPriceUsd * SYP_PER_USD).toLocaleString()} ل.س).`,
+      message: `تم تحديث سعر الليلة بنجاح إلى $${tempPriceUsd} (~${(tempPriceUsd * (sypExchangeRate || 14800)).toLocaleString()} ل.س).`,
       type: 'system'
     });
   };
@@ -202,7 +203,7 @@ export const HostPortalPage: React.FC = () => {
                 <span className="text-xs font-bold text-slate-500">إجمالي الأرباح بالدولار</span>
                 <h3 className="text-2xl font-black text-emerald-700 mt-1">${totalRevenueUsd.toLocaleString()}</h3>
                 <span className="text-[11px] font-bold text-slate-400 mt-0.5 block">
-                  ~{(totalRevenueUsd * SYP_PER_USD).toLocaleString()} ل.س
+                  ~{(totalRevenueUsd * (sypExchangeRate || 14800)).toLocaleString()} ل.س
                 </span>
               </div>
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
@@ -408,7 +409,7 @@ export const HostPortalPage: React.FC = () => {
                                 ${prop.priceUsd} <span className="text-[10px] font-normal text-slate-500">/ ليلة</span>
                               </span>
                               <span className="text-[10px] text-slate-400">
-                                (~{(prop.priceUsd * SYP_PER_USD).toLocaleString()} ل.س)
+                                (~{(prop.priceUsd * (sypExchangeRate || 14800)).toLocaleString()} ل.س)
                               </span>
                               <button
                                 onClick={() => {
@@ -567,7 +568,7 @@ export const HostPortalPage: React.FC = () => {
                           ${booking.totalPriceUsd} USD
                         </span>
                         <span className="text-[11px] font-bold text-slate-400 block">
-                          (~{(booking.totalPriceSyp || booking.totalPriceUsd * SYP_PER_USD).toLocaleString()} ل.س)
+                          (~{(booking.totalPriceSyp || booking.totalPriceUsd * (sypExchangeRate || 14800)).toLocaleString()} ل.س)
                         </span>
                         <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md inline-block mt-0.5">
                           {booking.paymentMethod}
