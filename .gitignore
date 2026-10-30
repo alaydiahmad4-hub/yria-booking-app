@@ -5,6 +5,14 @@ dist-ssr
 *.local
 *.tsbuildinfo
 
+# SQLite databases & temp journals
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+server/*.sqlite
+server/*.sqlite-shm
+server/*.sqlite-wal
+
 # server runtime artifacts
 server/temp_*.json
 server/voucher_*.pdf

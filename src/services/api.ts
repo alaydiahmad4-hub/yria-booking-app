@@ -12,7 +12,97 @@ const getBaseUrl = () => {
 
 const API_URL = getBaseUrl();
 
+export interface AuthUser {
+  id: string;
+  phone: string;
+  name: string;
+  role: 'guest' | 'host' | 'admin';
+}
+
 export const api = {
+  getAuthToken(): string | null {
+    if (typeof window === 'undefined') return null;
+    return localStorage.getItem('seyran_auth_token');
+  },
+
+  setAuthToken(token: string | null) {
+    if (typeof window === 'undefined') return;
+    if (token) localStorage.setItem('seyran_auth_token', token);
+    else localStorage.removeItem('seyran_auth_token');
+  },
+
+  // 1. Authentication Endpoints (Step 2)
+  async login(phone: string, password: string): Promise<{ user: AuthUser; token: string } | null> {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, password }),
+        signal: AbortSignal.timeout(4000)
+      });
+      if (!res.ok) throw new Error('Login failed');
+      const data = await res.json();
+      if (data.token) this.setAuthToken(data.token);
+      return data;
+    } catch (e) {
+      console.warn('API login error:', e);
+      return null;
+    }
+  },
+
+  async register(phone: string, name: string, password: string, role: string = 'guest'): Promise<{ user: AuthUser; token: string } | null> {
+    try {
+      const res = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, name, password, role }),
+        signal: AbortSignal.timeout(4000)
+      });
+      if (!res.ok) throw new Error('Registration failed');
+      const data = await res.json();
+      if (data.token) this.setAuthToken(data.token);
+      return data;
+    } catch (e) {
+      console.warn('API register error:', e);
+      return null;
+    }
+  },
+
+  async otpLogin(phone: string, name?: string, otp: string = '123456'): Promise<{ user: AuthUser; token: string } | null> {
+    try {
+      const res = await fetch(`${API_URL}/auth/otp-login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, name, otp }),
+        signal: AbortSignal.timeout(4000)
+      });
+      if (!res.ok) throw new Error('OTP Login failed');
+      const data = await res.json();
+      if (data.token) this.setAuthToken(data.token);
+      return data;
+    } catch (e) {
+      console.warn('API otpLogin error:', e);
+      return null;
+    }
+  },
+
+  async getCurrentUser(): Promise<AuthUser | null> {
+    const token = this.getAuthToken();
+    if (!token) return null;
+    try {
+      const res = await fetch(`${API_URL}/auth/me`, {
+        headers: { 'Authorization': `Bearer ${token}` },
+        signal: AbortSignal.timeout(3000)
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data.user;
+    } catch {
+      return null;
+    }
+  },
+
+  // 2. Properties Endpoints
   async getProperties(includeAll: boolean = false) {
     try {
       const res = await fetch(`${API_URL}/properties?all=${includeAll}`, {
@@ -72,6 +162,7 @@ export const api = {
     }
   },
 
+  // 3. Bookings & Escrow Endpoints
   async getBookings() {
     try {
       const res = await fetch(`${API_URL}/bookings`, {
@@ -91,7 +182,7 @@ export const api = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(booking),
-        signal: AbortSignal.timeout(2500)
+        signal: AbortSignal.timeout(3000)
       });
       if (!res.ok) throw new Error('API error');
       return await res.json();
@@ -117,6 +208,40 @@ export const api = {
     }
   },
 
+  // 4. Payment Gateway Webhooks (Step 3)
+  async verifyPaymentReference(bookingId: string, reference: string, provider: string = 'al_haram') {
+    try {
+      const res = await fetch(`${API_URL}/payments/verify-reference`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bookingId, reference, provider }),
+        signal: AbortSignal.timeout(4000)
+      });
+      if (!res.ok) throw new Error('Payment verification error');
+      return await res.json();
+    } catch (e) {
+      console.warn('API verifyPaymentReference error:', e);
+      return null;
+    }
+  },
+
+  async triggerSyriatelWebhook(transactionId: string, bookingId: string, amountSyp: number, senderPhone: string) {
+    try {
+      const res = await fetch(`${API_URL}/payments/syriatel/webhook`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ transactionId, bookingId, amountSyp, senderPhone, status: 'SUCCESS' }),
+        signal: AbortSignal.timeout(4000)
+      });
+      if (!res.ok) throw new Error('Syriatel webhook error');
+      return await res.json();
+    } catch (e) {
+      console.warn('API triggerSyriatelWebhook error:', e);
+      return null;
+    }
+  },
+
+  // 5. Admin & PDF Endpoints
   async getStats() {
     try {
       const res = await fetch(`${API_URL}/stats`, {
@@ -130,10 +255,19 @@ export const api = {
     }
   },
 
+  async downloadVoucherPdf(bookingId: string) {
+    try {
+      window.open(`${API_URL}/bookings/${bookingId}/pdf`, '_blank');
+    } catch (e) {
+      console.error('Download voucher PDF failed', e);
+    }
+  },
+
+  // 6. Chat & Concierge Endpoints
   async getChatMessages() {
     try {
       const res = await fetch(`${API_URL}/chat/messages`, {
-        signal: AbortSignal.timeout(3000)
+        signal: AbortSignal.timeout(2500)
       });
       if (!res.ok) throw new Error('Chat API error');
       return await res.json();

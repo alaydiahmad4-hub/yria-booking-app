@@ -11,7 +11,10 @@ import {
   WifiOff,
   Building2,
   Bell,
-  Globe
+  Globe,
+  User,
+  LogOut,
+  ShieldAlert
 } from 'lucide-react';
 import { SeyranBrandLogo } from './SeyranBrandLogo';
 
@@ -30,7 +33,12 @@ export const Header: React.FC = () => {
     setIsOfflineModalOpen,
     offlineBookings,
     unreadNotificationCount,
-    setIsNotificationOpen
+    setIsNotificationOpen,
+    currentUser,
+    setIsAuthModalOpen,
+    logout,
+    isAdminMode,
+    setIsAdminMode
   } = useApp();
 
   const damascusHotelsCount = properties.filter(p => p.governorate === 'دمشق' && p.type === 'hotel').length;
@@ -213,6 +221,45 @@ export const Header: React.FC = () => {
                 </span>
               )}
             </button>
+
+            {/* User Account / Login Button */}
+            {currentUser ? (
+              <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+                <button
+                  onClick={() => {
+                    if (currentUser.role === 'admin') setIsAdminMode(!isAdminMode);
+                    else if (currentUser.role === 'host') setActiveTab('host');
+                  }}
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white shadow-2xs font-bold text-slate-800 hover:text-emerald-700 transition-colors"
+                  title={`الحساب: ${currentUser.name}`}
+                >
+                  <User className="w-3.5 h-3.5 text-emerald-700" />
+                  <span className="max-w-[80px] sm:max-w-[120px] truncate">{currentUser.name}</span>
+                  {currentUser.role === 'admin' && (
+                    <span className="text-[9px] bg-amber-400 text-slate-950 px-1 py-0.2 rounded font-black">مدير</span>
+                  )}
+                  {currentUser.role === 'host' && (
+                    <span className="text-[9px] bg-emerald-100 text-emerald-800 px-1 py-0.2 rounded font-black">مضيف</span>
+                  )}
+                </button>
+                <button
+                  onClick={logout}
+                  className="p-1 hover:text-rose-600 text-slate-500 rounded-lg hover:bg-rose-50 transition-colors"
+                  title="تسجيل الخروج"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsAuthModalOpen(true)}
+                className="flex items-center gap-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-300 border border-slate-200 text-slate-700 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-2xs flex-shrink-0"
+                title="تسجيل الدخول أو إنشاء حساب"
+              >
+                <User className="w-3.5 h-3.5 text-emerald-700" />
+                <span className="hidden sm:inline">تسجيل الدخول</span>
+              </button>
+            )}
 
             {/* Host & Hotel Portal Button */}
             <button

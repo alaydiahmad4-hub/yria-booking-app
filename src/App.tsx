@@ -22,6 +22,7 @@ import { SyrianSectionsGrid } from './components/SyrianSectionsGrid';
 import { SyrianMarketShowcase } from './components/SyrianMarketShowcase';
 import { SyrianMarketNeedsModal } from './components/SyrianMarketNeedsModal';
 import { OfflineEmergencyModal } from './components/OfflineEmergencyModal';
+import { AuthModal } from './components/AuthModal';
 import { WhatsAppSupportFAB } from './components/WhatsAppSupportFAB';
 import { useApp } from './context/AppContext';
 import { 
@@ -473,6 +474,7 @@ export const MainContent: React.FC = () => {
       <BrandHeritageModal />
       <SyrianMarketNeedsModal />
       <OfflineEmergencyModal />
+      <AuthModal />
 
       {/* Lazy Loaded Modals with Shimmer Fallbacks */}
       <Suspense fallback={<NotificationCenterSkeleton />}>

@@ -354,6 +354,24 @@
       "propertyId": null,
       "timestamp": "2026-10-27T18:21:21.721Z",
       "status": "delivered"
+    },
+    {
+      "id": "msg-1793364396666-f8dl",
+      "sender": "user",
+      "senderName": "الضيف",
+      "text": "هل يتوفر شاليه في يعفور؟",
+      "propertyId": null,
+      "timestamp": "2026-10-30T12:46:36.666Z",
+      "status": "delivered"
+    },
+    {
+      "id": "msg-1793364396671-reply",
+      "sender": "support",
+      "senderName": "مستشار سيران الذكي",
+      "text": "🏡 متوفر لدينا شاليهات ومزارع مميزة في يعفور وبلودان وصحنايا مع مسابح معقمة وسواتر خصوصية عائلية تامة. هل ترغب بحجز لقضاء يوم (Day Use) أم إقامة كاملة؟",
+      "propertyId": null,
+      "timestamp": "2026-10-30T12:46:36.670Z",
+      "status": "delivered"
     }
   ]
 }

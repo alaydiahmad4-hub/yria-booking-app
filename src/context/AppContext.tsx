@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Property, Currency, BookingRequest, PropertyType, Governorate, AdvancedFilterState, ChatMessage, AppNotification, SmsMessage } from '../types';
 import { MOCK_PROPERTIES, SYP_PER_USD } from '../data/mockData';
-import { api } from '../services/api';
+import { api, AuthUser } from '../services/api';
 
 interface AppContextType {
   properties: Property[];
@@ -157,6 +157,13 @@ interface AppContextType {
   resetChatMessages: () => Promise<void>;
   unreadChatCount: number;
   isChatSending: boolean;
+
+  // User Authentication State (Step 2)
+  currentUser: AuthUser | null;
+  setCurrentUser: (u: AuthUser | null) => void;
+  isAuthModalOpen: boolean;
+  setIsAuthModalOpen: (b: boolean) => void;
+  logout: () => void;
 }
 
 const DEFAULT_FILTERS: AdvancedFilterState = {
@@ -226,11 +233,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isFavoritesModalOpen, setIsFavoritesModalOpen] = useState(false);
   const [bookings, setBookings] = useState<BookingRequest[]>([]);
   const [isAdminMode, setIsAdminMode] = useState(false);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  const logout = () => {
+    api.setAuthToken(null);
+    setCurrentUser(null);
+  };
 
   // Sync with real backend database
   useEffect(() => {
     const syncWithBackend = async () => {
       try {
+        api.getCurrentUser().then(u => {
+          if (u) setCurrentUser(u);
+        });
+
         const [backendProps, backendBookings] = await Promise.all([
           api.getProperties(true),
           api.getBookings()
@@ -797,7 +815,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         sendChatMessage,
         resetChatMessages,
         unreadChatCount,
-        isChatSending
+        isChatSending,
+        currentUser,
+        setCurrentUser,
+        isAuthModalOpen,
+        setIsAuthModalOpen,
+        logout
       }}
     >
       {children}
