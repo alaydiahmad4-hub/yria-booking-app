@@ -32,7 +32,8 @@ import {
   Crown,
   Lock,
   DollarSign,
-  Gift
+  Gift,
+  AlertCircle
 } from 'lucide-react';
 import { PaymentMethod } from '../types';
 
@@ -50,8 +51,12 @@ export const BookingModal: React.FC = () => {
     isPriceFrozen,
     getFrozenPrice,
     selectedRoomId,
-    setSelectedRoomId
+    setSelectedRoomId,
+    sypExchangeRate
   } = useApp();
+
+  const [bookingError, setBookingError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [bookingType, setBookingType] = useState<'overnight' | 'day_use'>('overnight');
   const [nights, setNights] = useState(2);
@@ -135,7 +140,7 @@ export const BookingModal: React.FC = () => {
   const totalDiscountUsd = weeklyDiscountUsd + geniusDiscountUsd + promoDiscountUsd;
   const chauffeurFeeUsd = hasChauffeur ? 25 : 0;
   const totalUsd = Math.max(0, subtotalUsd - totalDiscountUsd) + chauffeurFeeUsd;
-  const totalSyp = totalUsd * SYP_PER_USD;
+  const totalSyp = totalUsd * (sypExchangeRate || SYP_PER_USD);
 
   const handleApplyPromo = () => {
     setPromoError('');
@@ -151,10 +156,11 @@ export const BookingModal: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!guestName || !guestPhone) {
-      alert('يرجى ملء الاسم ورقم الهاتف/الواتساب');
+    setBookingError(null);
+    if (!guestName.trim() || !guestPhone.trim()) {
+      setBookingError('يرجى كتابة الاسم ورقم الهاتف أو الواتساب للمتابعة');
       return;
     }
 
@@ -191,15 +197,28 @@ export const BookingModal: React.FC = () => {
       hasWelcomeBasket: isFamilyGift ? hasWelcomeBasket : undefined
     };
 
-    createBooking(newBooking);
-    setLatestConfirmedBooking(newBooking);
-    setIsBookingOpen(false);
-    setIsVoucherModalOpen(true);
+    setIsSubmitting(true);
+    try {
+      const res = await createBooking(newBooking);
+      if (!res.success) {
+        setBookingError(res.error || 'عذراً، هذا العقار محجوز مسبقاً في هذه التواريخ المحددة.');
+        setIsSubmitting(false);
+        return;
+      }
+      setLatestConfirmedBooking(newBooking);
+      setIsBookingOpen(false);
+      setIsVoucherModalOpen(true);
+    } catch (err: any) {
+      setBookingError(err.message || 'تعذر استكمال الحجز، يرجى المحاولة لاحقاً.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleWhatsAppBooking = () => {
-    if (!guestName || !guestPhone) {
-      alert('يرجى كتابة الاسم ورقم الهاتف/الواتساب للمتابعة');
+  const handleWhatsAppBooking = async () => {
+    setBookingError(null);
+    if (!guestName.trim() || !guestPhone.trim()) {
+      setBookingError('يرجى كتابة الاسم ورقم الهاتف أو الواتساب للمتابعة');
       return;
     }
 
@@ -237,10 +256,17 @@ export const BookingModal: React.FC = () => {
       hasWelcomeBasket: isFamilyGift ? hasWelcomeBasket : undefined
     };
 
-    createBooking(newBooking);
-    setLatestConfirmedBooking(newBooking);
-    setIsBookingOpen(false);
-    setIsVoucherModalOpen(true);
+    setIsSubmitting(true);
+    try {
+      const res = await createBooking(newBooking);
+      if (!res.success) {
+        setBookingError(res.error || 'عذراً، هذا العقار غير متاح في التواريخ المختارة.');
+        setIsSubmitting(false);
+        return;
+      }
+      setLatestConfirmedBooking(newBooking);
+      setIsBookingOpen(false);
+      setIsVoucherModalOpen(true);
 
     const paymentLabel = isUsd
       ? `بالدولار الأمريكي ($ USD) - ${
@@ -272,6 +298,11 @@ export const BookingModal: React.FC = () => {
       `\nأرجو التحقق وتأكيد استلام العربون وحجز الموعد. شكراً لكم!`;
 
     window.open(`https://wa.me/963933112233?text=${encodeURIComponent(waMsg)}`, '_blank');
+    } catch (err: any) {
+      setBookingError(err.message || 'تعذر استكمال الحجز عبر واتساب.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -300,6 +331,26 @@ export const BookingModal: React.FC = () => {
         {/* Content */}
         <div className="p-6 overflow-y-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
+            
+            {/* Inline Error & Double-Booking Guard Banner */}
+            {bookingError && (
+              <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-start justify-between gap-3 animate-fadeIn shadow-xs">
+                <div className="flex items-start gap-2.5">
+                  <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                  <div className="space-y-0.5">
+                    <p className="font-bold text-rose-900 text-sm">تنبيه الحجز وتعارض التواريخ</p>
+                    <p className="leading-relaxed">{bookingError}</p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setBookingError(null)}
+                  className="p-1 rounded-lg hover:bg-rose-100 text-rose-500 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            )}
             
             {/* Hotel Room Options Selector (Booking.com style) */}
             {selectedProperty.roomOptions && selectedProperty.roomOptions.length > 0 && (
@@ -1273,7 +1324,8 @@ export const BookingModal: React.FC = () => {
               <button
                 type="button"
                 onClick={handleWhatsAppBooking}
-                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-3.5 rounded-2xl text-sm shadow-md shadow-emerald-500/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 border border-emerald-400"
+                disabled={isSubmitting}
+                className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-extrabold py-3.5 rounded-2xl text-sm shadow-md shadow-emerald-500/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 border border-emerald-400"
               >
                 <MessageCircle className="w-5 h-5 fill-white" />
                 <span>تأكيد الحجز فورياً عبر واتساب (WhatsApp)</span>
@@ -1281,7 +1333,8 @@ export const BookingModal: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-black py-3.5 rounded-2xl text-sm shadow-lg shadow-slate-900/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-black py-3.5 rounded-2xl text-sm shadow-lg shadow-slate-900/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2"
               >
                 <Check className="w-5 h-5 text-emerald-400" />
                 <span>تأكيد الحجز وإصدار القسيمة الفندقية الرسمية</span>

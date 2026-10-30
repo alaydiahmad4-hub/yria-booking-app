@@ -37,8 +37,32 @@ export const AdminDashboard: React.FC = () => {
     currency,
     chatMessages,
     sendChatMessage,
-    resetChatMessages
+    resetChatMessages,
+    sypExchangeRate,
+    updateExchangeRate
   } = useApp();
+
+  const [newRateInput, setNewRateInput] = useState<string>(sypExchangeRate.toString());
+  const [isUpdatingRate, setIsUpdatingRate] = useState(false);
+  const [rateSuccessMessage, setRateSuccessMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setNewRateInput(sypExchangeRate.toString());
+  }, [sypExchangeRate]);
+
+  const handleSaveExchangeRate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const rateNum = Number(newRateInput);
+    if (!rateNum || rateNum <= 0) return;
+    setIsUpdatingRate(true);
+    setRateSuccessMessage(null);
+    const res = await updateExchangeRate(rateNum);
+    setIsUpdatingRate(false);
+    if (res.success) {
+      setRateSuccessMessage(`تم تحديث سعر الصرف إلى ${rateNum.toLocaleString('ar-SY')} ل.س / $ بنجاح.`);
+      setTimeout(() => setRateSuccessMessage(null), 4000);
+    }
+  };
   const [activeTab, setActiveTab] = useState<'bookings' | 'properties' | 'wallets' | 'chat'>('bookings');
   const [adminReplyText, setAdminReplyText] = useState('');
   
@@ -192,7 +216,7 @@ export const AdminDashboard: React.FC = () => {
             <div>
               <div className="text-xs text-slate-400 font-medium">حجم الحجوزات الكلي</div>
               <div className="text-xl font-black text-emerald-400 mt-0.5">${stats.totalVolumeUsd}</div>
-              <div className="text-[10px] text-slate-400 font-mono">{(stats.totalVolumeUsd * SYP_PER_USD).toLocaleString('ar-SY')} ل.س</div>
+              <div className="text-[10px] text-slate-400 font-mono">{(stats.totalVolumeUsd * sypExchangeRate).toLocaleString('ar-SY')} ل.س</div>
             </div>
           </div>
 
@@ -229,6 +253,55 @@ export const AdminDashboard: React.FC = () => {
             </div>
           </div>
 
+        </div>
+
+                {/* Dynamic SYP/USD Exchange Rate Controller */}
+        <div className="bg-gradient-to-r from-emerald-950/60 via-slate-900 to-slate-900 border border-emerald-500/30 rounded-2xl p-5 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="p-3 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <Banknote className="w-6 h-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-white">إدارة سعر صرف الليرة السورية المباشر</h3>
+                <span className="bg-emerald-500/20 text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  سعر الصرف الفعلي: {sypExchangeRate.toLocaleString('ar-SY')} ل.س / $
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-1">
+                يتحكم هذا الإعداد بكافة أسعار العقارات، العرابين المحجوزة، وحوالات سيريتل كاش والهرم في كامل المنصة لحظياً.
+              </p>
+              {rateSuccessMessage && (
+                <div className="text-emerald-400 text-xs font-bold mt-1.5 flex items-center gap-1">
+                  <CheckCircle className="w-3.5 h-3.5" />
+                  <span>{rateSuccessMessage}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <form onSubmit={handleSaveExchangeRate} className="flex items-center gap-2 w-full md:w-auto">
+            <div className="relative">
+              <input
+                type="number"
+                min="1000"
+                step="100"
+                value={newRateInput}
+                onChange={(e) => setNewRateInput(e.target.value)}
+                className="w-36 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-white text-sm font-bold focus:outline-none focus:border-emerald-500 text-center"
+                placeholder="14500"
+              />
+              <span className="absolute left-2.5 top-2.5 text-xs text-slate-400 pointer-events-none font-bold">ل.س</span>
+            </div>
+            <button
+              type="submit"
+              disabled={isUpdatingRate || Number(newRateInput) === sypExchangeRate}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md shrink-0"
+            >
+              {isUpdatingRate ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />}
+              <span>تحديث السعر</span>
+            </button>
+          </form>
         </div>
 
         {/* Tab Navigation Controls */}

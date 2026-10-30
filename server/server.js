@@ -21,6 +21,26 @@ const JWT_SECRET = process.env.JWT_SECRET || 'seyran_syria_super_secret_jwt_key_
 app.use(cors());
 app.use(express.json());
 
+// In-memory Brute-Force Rate Limiter for Login
+const loginAttempts = new Map();
+function loginRateLimiter(req, res, next) {
+  const ip = req.ip || req.connection?.remoteAddress || 'unknown';
+  const now = Date.now();
+  const windowMs = 15 * 60 * 1000; // 15 mins window
+  const maxAttempts = 10;
+
+  const userAttempts = loginAttempts.get(ip) || [];
+  const recentAttempts = userAttempts.filter(timestamp => now - timestamp < windowMs);
+
+  if (recentAttempts.length >= maxAttempts) {
+    return res.status(429).json({ error: 'تم تجاوز الحد المسموح من محاولات تسجيل الدخول. يرجى الانتظار 15 دقيقة.' });
+  }
+
+  recentAttempts.push(now);
+  loginAttempts.set(ip, recentAttempts);
+  next();
+}
+
 // Auth Token Verification Middleware
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -32,6 +52,20 @@ function authenticateToken(req, res, next) {
     req.user = user;
     next();
   });
+}
+
+function requireAdmin(req, res, next) {
+  if (!req.user || req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'هذا الإجراء مخصص لمديري المنصة فقط' });
+  }
+  next();
+}
+
+function requireHostOrAdmin(req, res, next) {
+  if (!req.user || (req.user.role !== 'host' && req.user.role !== 'admin')) {
+    return res.status(403).json({ error: 'هذا الإجراء يتطلب حساب مضيف أو مدير' });
+  }
+  next();
 }
 
 // -------------------------------------------------------------
@@ -76,7 +110,7 @@ app.post('/api/auth/register', (req, res) => {
   }
 });
 
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/auth/login', loginRateLimiter, (req, res) => {
   try {
     const { phone, password } = req.body;
     if (!phone || !password) {
@@ -105,7 +139,7 @@ app.post('/api/auth/login', (req, res) => {
 });
 
 // Mock Syrian SMS OTP Verification Endpoint
-app.post('/api/auth/otp-login', (req, res) => {
+app.post('/api/auth/otp-login', loginRateLimiter, (req, res) => {
   try {
     const { phone, name, otp } = req.body;
     if (!phone) {
@@ -309,13 +343,36 @@ app.get('/api/bookings', (req, res) => {
 app.post('/api/bookings', (req, res) => {
   try {
     const b = req.body;
+    const createdAt = new Date().toISOString();
+    const checkIn = b.checkIn || createdAt.split('T')[0];
+    const checkOut = b.checkOut || createdAt.split('T')[0];
+    const propertyId = b.propertyId || 'prop-1';
+
+    // Double-Booking Prevention: Check for overlapping active bookings
+    const conflict = db.prepare(`
+      SELECT id, check_in, check_out, guest_name FROM bookings
+      WHERE property_id = ?
+        AND payment_status != 'cancelled'
+        AND escrow_status != 'refunded_to_guest'
+        AND check_in < ?
+        AND check_out > ?
+      LIMIT 1
+    `).get(propertyId, checkOut, checkIn);
+
+    if (conflict) {
+      return res.status(409).json({
+        error: 'عذراً، هذا العقار محجوز مسبقاً في هذه التواريخ المحددة. يرجى اختيار تاريخ آخر.',
+        conflictBookingId: conflict.id,
+        bookedDates: { from: conflict.check_in, to: conflict.check_out }
+      });
+    }
+
     const { totalPriceUsd = 100, totalPriceSyp = 1450000 } = b;
     const depositUsd = Math.round(totalPriceUsd * 0.25);
     const depositSyp = Math.round(totalPriceSyp * 0.25);
     const remainingUsd = totalPriceUsd - depositUsd;
     const remainingSyp = totalPriceSyp - depositSyp;
     const id = b.id || `book-${Date.now()}`;
-    const createdAt = new Date().toISOString();
     const paymentStatus = b.paymentMethod === 'cash_deposit' ? 'cash_on_arrival' : 'pending_verification';
     const escrowStatus = 'held_in_escrow';
 
@@ -521,6 +578,40 @@ app.get('/api/stats', (req, res) => {
   } catch (err) {
     console.error('Stats error:', err);
     res.status(500).json({ error: 'فشل جلب الإحصائيات' });
+  }
+});
+
+// -------------------------------------------------------------
+// Dynamic Syrian Exchange Rate Setting (Admin Managed)
+// -------------------------------------------------------------
+app.get('/api/settings/exchange-rate', (req, res) => {
+  try {
+    const row = db.prepare("SELECT value, updated_at FROM settings WHERE key = 'syp_rate'").get();
+    const rate = row ? parseInt(row.value, 10) : 14500;
+    res.json({ rate, updatedAt: row ? row.updated_at : new Date().toISOString() });
+  } catch (err) {
+    res.json({ rate: 14500, updatedAt: new Date().toISOString() });
+  }
+});
+
+app.post('/api/settings/exchange-rate', (req, res) => {
+  try {
+    const { rate } = req.body;
+    const numRate = parseInt(rate, 10);
+    if (!numRate || numRate < 1000) {
+      return res.status(400).json({ error: 'سعر الصرف غير صالح، يجب أن يكون رقماً صحيحاً' });
+    }
+    const updatedAt = new Date().toISOString();
+    db.prepare(`
+      INSERT INTO settings (key, value, updated_at)
+      VALUES ('syp_rate', ?, ?)
+      ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at
+    `).run(numRate.toString(), updatedAt);
+
+    res.json({ success: true, rate: numRate, updatedAt, message: 'تم تحديث سعر الصرف الرسمي بنجاح' });
+  } catch (err) {
+    console.error('Exchange rate update error:', err);
+    res.status(500).json({ error: 'فشل تحديث سعر الصرف', details: err.message });
   }
 });
 

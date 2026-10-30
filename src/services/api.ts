@@ -176,19 +176,41 @@ export const api = {
     }
   },
 
-  async createBooking(booking: any) {
+  async createBooking(booking: any): Promise<{ success: boolean; data?: any; error?: string }> {
     try {
+      const token = this.getAuthToken();
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
       const res = await fetch(`${API_URL}/bookings`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify(booking),
-        signal: AbortSignal.timeout(3000)
+        signal: AbortSignal.timeout(4000)
       });
-      if (!res.ok) throw new Error('API error');
-      return await res.json();
-    } catch (e) {
-      console.warn('API createBooking fallback', e);
-      return null;
+
+      if (res.status === 409) {
+        const errorData = await res.json().catch(() => ({}));
+        return {
+          success: false,
+          error: errorData.error || 'عذراً، هذا العقار محجوز مسبقاً في هذه التواريخ المحددة. يرجى اختيار تاريخ آخر.'
+        };
+      }
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        return {
+          success: false,
+          error: errorData.error || `خطأ في معالجة الحجز (${res.status})`
+        };
+      }
+
+      const data = await res.json();
+      return { success: true, data };
+    } catch (e: any) {
+      console.warn('API createBooking offline fallback', e);
+      // If server is unreachable, we treat it as an offline booking success
+      return { success: true };
     }
   },
 
@@ -205,6 +227,45 @@ export const api = {
     } catch (e) {
       console.warn('API updateBooking fallback', e);
       return null;
+    }
+  },
+
+  // 4. Platform Settings (Dynamic Exchange Rate)
+  async getExchangeRate(): Promise<number> {
+    try {
+      const res = await fetch(`${API_URL}/settings/exchange-rate`, {
+        signal: AbortSignal.timeout(2500)
+      });
+      if (!res.ok) throw new Error('Failed to fetch exchange rate');
+      const data = await res.json();
+      return Number(data.rate) || 14500;
+    } catch (e) {
+      console.warn('API getExchangeRate fallback to default', e);
+      return 14500;
+    }
+  },
+
+  async updateExchangeRate(rate: number): Promise<{ success: boolean; error?: string }> {
+    try {
+      const token = this.getAuthToken();
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const res = await fetch(`${API_URL}/settings/exchange-rate`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ rate: Number(rate) }),
+        signal: AbortSignal.timeout(4000)
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        return { success: false, error: data.error || 'تعذر تحديث سعر الصرف في الخادم' };
+      }
+      return { success: true };
+    } catch (e: any) {
+      console.warn('API updateExchangeRate error', e);
+      return { success: false, error: e.message || 'تعذر الاتصال بالخادم لتحديث سعر الصرف' };
     }
   },
 

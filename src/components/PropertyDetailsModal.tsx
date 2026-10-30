@@ -51,7 +51,8 @@ export const PropertyDetailsModal: React.FC = () => {
     isPriceFrozen,
     getFrozenPrice,
     setSelectedRoomId,
-    openChatWithProperty
+    openChatWithProperty,
+    addNotification
   } = useApp();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
@@ -72,7 +73,7 @@ export const PropertyDetailsModal: React.FC = () => {
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('تم نسخ رابط العقار إلى الحافظة!');
+      addNotification({ title: 'مشاركة العقار', message: 'تم نسخ رابط العقار إلى الحافظة بنجاح.', type: 'booking' });
     }
   };
 

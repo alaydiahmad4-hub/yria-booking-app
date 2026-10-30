@@ -141,7 +141,30 @@ describe('api.createBooking', () => {
 
     const result = await api.createBooking(booking)
     expect(result).toBeTruthy()
-    expect(result.id).toBe('bk-1')
+    expect(result.success).toBe(true)
+    expect(result.data?.id).toBe('bk-1')
+  })
+})
+
+describe('api.exchangeRate', () => {
+  it('fetches exchange rate correctly', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ rate: 14800 })
+    })
+
+    const rate = await api.getExchangeRate()
+    expect(rate).toBe(14800)
+  })
+
+  it('updates exchange rate correctly', async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ success: true, rate: 15000 })
+    })
+
+    const result = await api.updateExchangeRate(15000)
+    expect(result.success).toBe(true)
   })
 })
 

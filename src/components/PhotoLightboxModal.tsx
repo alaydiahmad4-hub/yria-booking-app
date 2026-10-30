@@ -18,7 +18,8 @@ export const PhotoLightboxModal: React.FC = () => {
     lightboxActiveIndex, 
     closeLightbox, 
     setLightboxActiveIndex,
-    selectedProperty 
+    selectedProperty,
+    addNotification
   } = useApp();
 
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -70,7 +71,7 @@ export const PhotoLightboxModal: React.FC = () => {
       }).catch(() => {});
     } else {
       navigator.clipboard.writeText(currentImage);
-      alert('تم نسخ رابط الصورة إلى الحافظة!');
+      addNotification({ title: 'مشاركة الصورة', message: 'تم نسخ رابط الصورة إلى الحافظة بنجاح.', type: 'booking' });
     }
   };
 

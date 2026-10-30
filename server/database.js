@@ -87,6 +87,12 @@ export function initDatabase() {
       created_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS settings (
+      key TEXT PRIMARY KEY,
+      value TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
     CREATE INDEX IF NOT EXISTS idx_properties_gov ON properties(governorate);
     CREATE INDEX IF NOT EXISTS idx_properties_type ON properties(type);
     CREATE INDEX IF NOT EXISTS idx_bookings_prop ON bookings(property_id);
@@ -110,6 +116,12 @@ export function initDatabase() {
       INSERT INTO users (id, phone, name, role, password_hash, created_at)
       VALUES (?, ?, ?, ?, ?, ?)
     `).run('usr-host-1', '+963933445566', 'أبو أحمد الشامي (مضيف يعفور)', 'host', hostHash, new Date().toISOString());
+  }
+
+  // Seed default exchange rate setting (1 USD = 14,500 SYP)
+  const rateExists = db.prepare('SELECT key FROM settings WHERE key = ?').get('syp_rate');
+  if (!rateExists) {
+    db.prepare('INSERT INTO settings (key, value, updated_at) VALUES (?, ?, ?)').run('syp_rate', '14500', new Date().toISOString());
   }
 
   // Seed initial properties from db.json if database table is empty

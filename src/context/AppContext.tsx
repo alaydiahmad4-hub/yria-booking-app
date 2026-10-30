@@ -76,8 +76,13 @@ interface AppContextType {
 
   // Operations
   bookings: BookingRequest[];
-  createBooking: (booking: BookingRequest) => void;
+  createBooking: (booking: BookingRequest) => Promise<{ success: boolean; error?: string }>;
   addNewProperty: (newProp: Omit<Property, 'id' | 'rating' | 'reviewCount' | 'ratingBreakdown' | 'coordinates'>) => void;
+
+  // Platform Dynamic Exchange Rate
+  sypExchangeRate: number;
+  setSypExchangeRate: (rate: number) => void;
+  updateExchangeRate: (rate: number) => Promise<{ success: boolean; error?: string }>;
 
   // Global Features: Booking.com Genius Loyalty Tier
   geniusTier: 1 | 2 | 3;
@@ -200,6 +205,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [activeTab, setActiveTab] = useState<'explore' | 'hotels' | 'map' | 'favorites' | 'host'>('explore');
   const [viewMode, setViewMode] = useState<'grid' | 'map'>('grid');
 
+  // Dynamic Exchange Rate state (seeded by default mock or persistent storage)
+  const [sypExchangeRate, setSypExchangeRate] = useState<number>(() => {
+    try {
+      const saved = localStorage.getItem('seyran_syp_rate');
+      return saved ? Number(saved) || SYP_PER_USD : SYP_PER_USD;
+    } catch {
+      return SYP_PER_USD;
+    }
+  });
+
   // Persist currency and favorites
   useEffect(() => {
     try {
@@ -247,6 +262,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       try {
         api.getCurrentUser().then(u => {
           if (u) setCurrentUser(u);
+        });
+
+        // Sync real-time dynamic exchange rate
+        api.getExchangeRate().then(rate => {
+          if (rate && typeof rate === 'number') {
+            setSypExchangeRate(rate);
+            try {
+              localStorage.setItem('seyran_syp_rate', rate.toString());
+            } catch {}
+          }
         });
 
         const [backendProps, backendBookings] = await Promise.all([
@@ -302,7 +327,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setComparisonList(prev => {
       if (prev.includes(id)) return prev;
       if (prev.length >= 3) {
-        alert('يمكنك مقارنة 3 فنادق/عقارات كحد أقصى في نفس الوقت');
+        addNotification({
+          title: 'حد المقارنة الأقصى',
+          message: 'يمكنك مقارنة 3 فنادق أو عقارات كحد أقصى في نفس الوقت لضمان دقة المقارنة.',
+          type: 'booking'
+        });
         return prev;
       }
       return [...prev, id];
@@ -440,7 +469,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const formatPrice = (priceUsd: number) => {
     if (currency === 'SYP') {
-      const syp = Math.round(priceUsd * SYP_PER_USD);
+      const syp = Math.round(priceUsd * sypExchangeRate);
       return `${syp.toLocaleString('ar-SY')} ل.س`;
     }
     return `$${priceUsd}`;
@@ -448,7 +477,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const getPriceValue = (priceUsd: number) => {
     if (currency === 'SYP') {
-      return { value: Math.round(priceUsd * SYP_PER_USD), label: 'ل.س' };
+      return { value: Math.round(priceUsd * sypExchangeRate), label: 'ل.س' };
     }
     return { value: priceUsd, label: '$' };
   };
@@ -526,11 +555,34 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setIsSmsModalOpen(true);
   };
 
-  const createBooking = (booking: BookingRequest) => {
+  const updateExchangeRate = async (newRate: number): Promise<{ success: boolean; error?: string }> => {
+    const res = await api.updateExchangeRate(newRate);
+    if (res.success) {
+      setSypExchangeRate(newRate);
+      try {
+        localStorage.setItem('seyran_syp_rate', newRate.toString());
+      } catch {}
+      addNotification({
+        title: 'تحديث سعر الصرف',
+        message: `تم تحديث سعر صرف الليرة السورية بنجاح إلى ${newRate.toLocaleString('ar-SY')} ل.س / $ لكل المنصة.`,
+        type: 'booking'
+      });
+    }
+    return res;
+  };
+
+  const createBooking = async (booking: BookingRequest): Promise<{ success: boolean; error?: string }> => {
+    // 1. Send to backend database and verify double-booking constraints
+    const apiRes = await api.createBooking(booking);
+    if (!apiRes.success && apiRes.error) {
+      return { success: false, error: apiRes.error };
+    }
+
+    // 2. Commit booking locally and save for offline accessibility
     setBookings(prev => [booking, ...prev]);
     saveBookingOffline(booking);
 
-    // Add real-time in-app notification
+    // 3. Add real-time in-app notification
     const prop = properties.find(p => p.id === booking.propertyId);
     addNotification({
       title: `🎉 تأكيد حجز جديد: ${booking.id}`,
@@ -539,11 +591,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       bookingId: booking.id
     });
 
-    // Trigger instant SMS simulation
+    // 4. Trigger instant SMS simulation
     triggerSmsConfirmation(booking);
 
-    // Persist to backend database
-    api.createBooking(booking).catch(e => console.warn(e));
+    return { success: true };
   };
 
   const addNewProperty = (newProp: Omit<Property, 'id' | 'rating' | 'reviewCount' | 'ratingBreakdown' | 'coordinates'>) => {
@@ -820,7 +871,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setCurrentUser,
         isAuthModalOpen,
         setIsAuthModalOpen,
-        logout
+        logout,
+        sypExchangeRate,
+        setSypExchangeRate,
+        updateExchangeRate
       }}
     >
       {children}
