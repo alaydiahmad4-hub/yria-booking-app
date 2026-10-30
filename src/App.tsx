@@ -270,56 +270,15 @@ export const MainContent: React.FC = () => {
         </main>
       )}
 
-      {/* Sub-page 4: Main Explore & Stays Page */}
+      {/* Sub-page 4: Main Explore & Stays Page — Streamlined for instant property visibility */}
       {activeTab === 'explore' && (
         <>
           <HeroSearch />
 
-          {/* Syrian 4 Primary Sections Grid: Hotels, Farms, Chalets, Apartments */}
-          <SyrianSectionsGrid />
-
-          {/* Syrian Market Specialized Pillars */}
-          <SyrianMarketShowcase />
-
-          {/* Featured Damascus Hotels Section Callout Banner */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 w-full">
-            <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white rounded-3xl p-5 sm:p-6 shadow-xl border border-emerald-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-4 text-right">
-                <div className="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 flex-shrink-0">
-                  <Hotel className="w-6 h-6" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded-md">
-                      دليل 2026
-                    </span>
-                    <h3 className="font-black text-base sm:text-lg text-white">
-                      قسم فنادق دمشق العريقة والفاخرة
-                    </h3>
-                  </div>
-                  <p className="text-xs text-slate-300 mt-1 max-w-xl leading-relaxed">
-                    استكشف {damascusHotels.length} فندقاً وقصراً دمشقياً معتمداً؛ من قصور دمشق القديمة التراثية إلى فنادق الـ 5 نجوم مع كهرباء وتكييف 24/7 دون انقطاع.
-                  </p>
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setActiveTab('hotels');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black px-5 py-3 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex-shrink-0"
-              >
-                <span>دخول قسم فنادق دمشق</span>
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
           <CategoryBar />
 
-          {/* Main Listings Section */}
-          <main id="properties-section" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+          {/* Main Listings Section — Placed immediately above the fold for zero scroll fatigue */}
+          <main id="properties-section" className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
             
             {/* Active Category Spotlight & Area Quick Filters */}
             {selectedType !== 'all' && (
@@ -384,18 +343,18 @@ export const MainContent: React.FC = () => {
             )}
 
             {/* Results Header Info & Reset */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-5">
               <div>
                 <h2 className="text-lg sm:text-xl font-black text-slate-900 flex items-center gap-2">
-                  <span>الإقامات المتاحة للحجز</span>
+                  <span>الإقامات المتاحة للحجز الفوري</span>
                   {selectedGovernorate !== 'الكل' && (
                     <span className="text-emerald-700 text-sm font-bold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
                       في {selectedGovernorate}
                     </span>
                   )}
                 </h2>
-                <p className="text-xs text-slate-500 font-medium mt-1">
-                  عُثر على {filteredProperties.length} من أصل {properties.length} إقامة موثقة
+                <p className="text-xs text-slate-500 font-medium mt-0.5">
+                  عُثر على {filteredProperties.length} من أصل {properties.length} إقامة موثقة ومفحوصة ميدانياً
                 </p>
               </div>
 
@@ -423,7 +382,7 @@ export const MainContent: React.FC = () => {
             ) : (
               /* Listings Grid */
               filteredProperties.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                   {filteredProperties.map((prop) => (
                     <PropertyCard key={prop.id} property={prop} />
                   ))}
@@ -450,6 +409,47 @@ export const MainContent: React.FC = () => {
             )}
 
           </main>
+
+          {/* Featured Damascus Hotels Section Callout Banner */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 w-full">
+            <div className="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 text-white rounded-3xl p-5 sm:p-6 shadow-xl border border-emerald-800/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4 text-right">
+                <div className="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 flex-shrink-0">
+                  <Hotel className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs bg-amber-400 text-slate-950 font-black px-2 py-0.5 rounded-md">
+                      دليل 2026
+                    </span>
+                    <h3 className="font-black text-base sm:text-lg text-white">
+                      قسم فنادق دمشق العريقة والفاخرة
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-300 mt-1 max-w-xl leading-relaxed">
+                    استكشف {damascusHotels.length} فندقاً وقصراً دمشقياً معتمداً؛ من قصور دمشق القديمة التراثية إلى فنادق الـ 5 نجوم مع كهرباء وتكييف 24/7 دون انقطاع.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setActiveTab('hotels');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-black px-5 py-3 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all hover:scale-105 active:scale-95 flex-shrink-0"
+              >
+                <span>دخول قسم فنادق دمشق</span>
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          {/* Syrian 4 Primary Sections Grid: Hotels, Farms, Chalets, Apartments */}
+          <SyrianSectionsGrid />
+
+          {/* Syrian Market Specialized Pillars */}
+          <SyrianMarketShowcase />
         </>
       )}
 

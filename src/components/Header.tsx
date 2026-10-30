@@ -120,14 +120,14 @@ export const Header: React.FC = () => {
             </button>
           </nav>
 
-          {/* Actions & Controls */}
+          {/* Actions & Controls — Streamlined on mobile to eliminate icon crowding */}
           <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             
-            {/* Language Switcher (AR / EN) */}
+            {/* Language Switcher (AR / EN) - Desktop & Tablet */}
             <button
               type="button"
               onClick={toggleLanguage}
-              className="flex items-center gap-1 px-2 py-1.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 text-[11px] sm:text-xs font-bold transition-all shadow-2xs"
+              className="hidden sm:flex items-center gap-1 px-2 py-1.5 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 text-[11px] sm:text-xs font-bold transition-all shadow-2xs"
               title={i18n.language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
             >
               <Globe className="w-3.5 h-3.5 text-emerald-700" />
@@ -136,23 +136,22 @@ export const Header: React.FC = () => {
               </span>
             </button>
 
-            {/* Genius Loyalty Badge */}
+            {/* Genius Loyalty Badge - Desktop & Tablet */}
             <button
               onClick={() => setIsGeniusModalOpen(true)}
-              className="flex items-center gap-1 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-[11px] sm:text-xs font-black shadow-xs hover:shadow-md transition-all flex-shrink-0"
+              className="hidden md:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs font-black shadow-xs hover:shadow-md transition-all flex-shrink-0"
               title="برنامج الولاء Genius"
             >
               <Crown className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
-              <span className="hidden sm:inline">Genius {geniusTier}</span>
-              <span className="sm:hidden font-bold">G{geniusTier}</span>
+              <span>Genius {geniusTier}</span>
             </button>
 
-            {/* Currency 2-Way Segmented Toggle: USD ($) vs SYP (ل.س) */}
-            <div className="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 text-[10px] sm:text-xs font-bold flex-shrink-0 shadow-2xs">
+            {/* Currency 2-Way Segmented Toggle: USD ($) vs SYP (ل.س) — Always visible for instant price check */}
+            <div className="flex items-center bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 text-[11px] sm:text-xs font-bold flex-shrink-0 shadow-2xs">
               <button
                 type="button"
                 onClick={() => setCurrency('USD')}
-                className={`px-1.5 py-1 sm:px-2 sm:py-1 rounded-lg transition-all ${
+                className={`px-2 py-1 rounded-lg transition-all ${
                   currency === 'USD' 
                     ? 'bg-white text-emerald-800 shadow-xs font-black' 
                     : 'text-slate-500 hover:text-slate-800'
@@ -160,12 +159,12 @@ export const Header: React.FC = () => {
                 title="عرض الأسعار بالدولار الأمريكي ($)"
               >
                 <span className="hidden sm:inline">$ USD</span>
-                <span className="sm:hidden font-black">$</span>
+                <span className="sm:hidden font-black">$ دولار</span>
               </button>
               <button
                 type="button"
                 onClick={() => setCurrency('SYP')}
-                className={`px-1.5 py-1 sm:px-2 sm:py-1 rounded-lg transition-all ${
+                className={`px-2 py-1 rounded-lg transition-all ${
                   currency === 'SYP' 
                     ? 'bg-emerald-600 text-white shadow-xs font-black' 
                     : 'text-slate-500 hover:text-slate-800'
@@ -181,7 +180,7 @@ export const Header: React.FC = () => {
             <button
               onClick={() => setIsNotificationOpen(true)}
               aria-label="مركز الإشعارات والتنبيهات المباشرة"
-              className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
+              className="relative p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
               title="مركز الإشعارات والتنبيهات المباشرة"
             >
               <Bell className="w-4 h-4 text-emerald-800" />
@@ -192,31 +191,31 @@ export const Header: React.FC = () => {
               )}
             </button>
 
-            {/* Offline Emergency Voucher Button */}
+            {/* Offline Emergency Voucher Button - Desktop & Tablet (on mobile inside Quick Services sheet) */}
             <button
               onClick={() => setIsOfflineModalOpen(true)}
               aria-label="سند الطوارئ والحجوزات بدون إنترنت"
-              className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
+              className="hidden sm:flex relative p-2 rounded-xl border border-slate-200 hover:border-emerald-400 hover:bg-emerald-50 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
               title="سند الطوارئ والحجوزات بدون إنترنت (Offline Mode)"
             >
               <WifiOff className="w-4 h-4 text-emerald-700" />
               {offlineBookings.length > 0 && (
-                <span className="absolute -top-1 -left-1 bg-emerald-600 text-white text-[9px] sm:text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-1 -left-1 bg-emerald-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                   {offlineBookings.length}
                 </span>
               )}
             </button>
 
-            {/* Favorites Wishlist */}
+            {/* Favorites Wishlist - Desktop & Tablet (on mobile directly in BottomNavBar) */}
             <button
               onClick={() => setIsFavoritesModalOpen(true)}
               aria-label="المفضلة"
-              className="relative p-1.5 sm:p-2 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/40 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
+              className="hidden sm:flex relative p-2 rounded-xl border border-slate-200 hover:border-rose-300 hover:bg-rose-50/40 text-slate-700 transition-all flex-shrink-0 shadow-2xs"
               title="المفضلة"
             >
               <Heart className={`w-4 h-4 transition-colors ${favorites.length > 0 ? 'text-rose-500 fill-rose-500' : 'text-slate-600'}`} />
               {favorites.length > 0 && (
-                <span className="absolute -top-1 -left-1 bg-rose-500 text-white text-[9px] sm:text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                <span className="absolute -top-1 -left-1 bg-rose-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
                   {favorites.length}
                 </span>
               )}
@@ -234,7 +233,7 @@ export const Header: React.FC = () => {
                   title={`الحساب: ${currentUser.name}`}
                 >
                   <User className="w-3.5 h-3.5 text-emerald-700" />
-                  <span className="max-w-[80px] sm:max-w-[120px] truncate">{currentUser.name}</span>
+                  <span className="max-w-[70px] sm:max-w-[120px] truncate">{currentUser.name}</span>
                   {currentUser.role === 'admin' && (
                     <span className="text-[9px] bg-amber-400 text-slate-950 px-1 py-0.2 rounded font-black">مدير</span>
                   )}
@@ -253,11 +252,12 @@ export const Header: React.FC = () => {
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center gap-1.5 bg-slate-100 hover:bg-emerald-50 hover:text-emerald-800 hover:border-emerald-300 border border-slate-200 text-slate-700 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-2xs flex-shrink-0"
+                className="flex items-center gap-1.5 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-2xs flex-shrink-0"
                 title="تسجيل الدخول أو إنشاء حساب"
               >
                 <User className="w-3.5 h-3.5 text-emerald-700" />
                 <span className="hidden sm:inline">تسجيل الدخول</span>
+                <span className="sm:hidden">دخول</span>
               </button>
             )}
 

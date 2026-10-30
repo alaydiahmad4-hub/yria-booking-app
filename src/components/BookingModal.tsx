@@ -57,6 +57,14 @@ export const BookingModal: React.FC = () => {
 
   const [bookingError, setBookingError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingStep, setBookingStep] = useState<1 | 2 | 3>(1);
+
+  useEffect(() => {
+    if (isBookingOpen) {
+      setBookingStep(1);
+      setBookingError(null);
+    }
+  }, [isBookingOpen, selectedProperty?.id]);
 
   const [bookingType, setBookingType] = useState<'overnight' | 'day_use'>('overnight');
   const [nights, setNights] = useState(2);
@@ -309,23 +317,57 @@ export const BookingModal: React.FC = () => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-sm animate-fadeIn overflow-y-auto">
       <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[95vh] flex flex-col">
         
-        {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-emerald-50/80 to-teal-50/80 sticky top-0 z-10">
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs px-2 py-0.5 font-bold rounded-full bg-emerald-600 text-white">سيران سوريا</span>
-              <h3 className="font-black text-slate-900 text-lg">إتمام الحجز وتأكيد الغرفة</h3>
+        {/* Header with 3-Step Progressive Wizard Stepper */}
+        <div className="px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-emerald-50/80 to-teal-50/80 sticky top-0 z-10 space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs px-2 py-0.5 font-bold rounded-full bg-emerald-600 text-white">سيران سوريا</span>
+                <h3 className="font-black text-slate-900 text-lg">إتمام الحجز وتأكيد الغرفة</h3>
+              </div>
+              <p className="text-xs text-slate-500 font-medium mt-0.5">
+                {selectedProperty.title} ({selectedProperty.area})
+              </p>
             </div>
-            <p className="text-xs text-slate-500 font-medium mt-0.5">
-              {selectedProperty.title} ({selectedProperty.area})
-            </p>
+            <button
+              onClick={() => setIsBookingOpen(false)}
+              className="p-2 rounded-full hover:bg-slate-200 text-slate-500 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
-          <button
-            onClick={() => setIsBookingOpen(false)}
-            className="p-2 rounded-full hover:bg-slate-200 text-slate-500 transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
+
+          {/* 3-Step Interactive Progress Bar */}
+          <div className="grid grid-cols-3 gap-2 pt-1">
+            {[
+              { step: 1 as const, label: '1. بيانات الإقامة' },
+              { step: 2 as const, label: '2. وسيلة الدفع' },
+              { step: 3 as const, label: '3. التأكيد والقسيمة' }
+            ].map((item) => (
+              <button
+                key={item.step}
+                type="button"
+                onClick={() => {
+                  if (item.step > 1 && (!guestName.trim() || !guestPhone.trim())) {
+                    setBookingError('يرجى إدخال الاسم الثلاثي ورقم الهاتف أولاً للانتقال لخطوة الدفع');
+                    return;
+                  }
+                  setBookingError(null);
+                  setBookingStep(item.step);
+                }}
+                className={`py-2 px-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 border ${
+                  bookingStep === item.step
+                    ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+                    : bookingStep > item.step
+                    ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+                    : 'bg-white/80 text-slate-500 border-slate-200 hover:bg-white'
+                }`}
+              >
+                {bookingStep > item.step && <Check className="w-3.5 h-3.5 text-emerald-700" />}
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Content */}
@@ -338,7 +380,7 @@ export const BookingModal: React.FC = () => {
                 <div className="flex items-start gap-2.5">
                   <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
                   <div className="space-y-0.5">
-                    <p className="font-bold text-rose-900 text-sm">تنبيه الحجز وتعارض التواريخ</p>
+                    <p className="font-bold text-rose-900 text-sm">تنبيه الحجز</p>
                     <p className="leading-relaxed">{bookingError}</p>
                   </div>
                 </div>
@@ -351,6 +393,10 @@ export const BookingModal: React.FC = () => {
                 </button>
               </div>
             )}
+
+            {/* STEP 1: Stay Details, Guest Info & Expat Gift */}
+            {bookingStep === 1 && (
+              <div className="space-y-5 animate-fadeIn">
             
             {/* Hotel Room Options Selector (Booking.com style) */}
             {selectedProperty.roomOptions && selectedProperty.roomOptions.length > 0 && (
@@ -605,6 +651,36 @@ export const BookingModal: React.FC = () => {
               )}
             </div>
 
+                {/* Step 1 Footer Bar: Live Total Preview + Next Button */}
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[11px] text-slate-500 font-bold block">التكلفة التقديرية ({bookingType === 'day_use' ? 'سيران نهاري' : `${nights} ليالٍ`}):</span>
+                    <div className="flex items-baseline gap-1.5">
+                      <span className="font-black text-emerald-800 text-base">${totalUsd} USD</span>
+                      <span className="text-xs text-slate-500 font-bold">({totalSyp.toLocaleString('ar-SY')} ل.س)</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!guestName.trim() || !guestPhone.trim()) {
+                        setBookingError('يرجى إدخال الاسم الثلاثي ورقم الموبايل أولاً للمتابعة إلى خطوة الدفع');
+                        return;
+                      }
+                      setBookingError(null);
+                      setBookingStep(2);
+                    }}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3 rounded-2xl text-xs sm:text-sm shadow-md shadow-emerald-600/20 transition-all hover:scale-[1.01] active:scale-95"
+                  >
+                    التالي: وسيلة الدفع ⬅️
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* STEP 2: Promo Code, Currency & Payment Method */}
+            {bookingStep === 2 && (
+              <div className="space-y-5 animate-fadeIn">
             {/* Promo Code Box */}
             <div className="bg-emerald-50/50 border border-emerald-200/70 rounded-2xl p-4 space-y-2">
               <label className="block text-xs font-bold text-slate-800 flex items-center gap-1.5">
@@ -1237,6 +1313,29 @@ export const BookingModal: React.FC = () => {
               )}
             </div>
 
+                {/* Step 2 Navigation Footer */}
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setBookingStep(1)}
+                    className="px-4 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs sm:text-sm transition-colors"
+                  >
+                    ➡️ السابق: بيانات الإقامة
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBookingStep(3)}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3 rounded-2xl text-xs sm:text-sm shadow-md shadow-emerald-600/20 transition-all hover:scale-[1.01] active:scale-95"
+                  >
+                    التالي: الملخص والتأكيد ⬅️
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* STEP 3: Final Summary, Syrian Escrow Guarantee & Instant Confirmation */}
+            {bookingStep === 3 && (
+              <div className="space-y-5 animate-fadeIn">
             {/* Price Breakdown Summary (Booking.com style) */}
             <div className="bg-slate-100 rounded-2xl p-4 space-y-2 border border-slate-200">
               <div className="flex justify-between text-xs text-slate-600">
@@ -1322,6 +1421,15 @@ export const BookingModal: React.FC = () => {
             {/* Submit & WhatsApp Action Buttons */}
             <div className="space-y-2.5 pt-2">
               <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-black py-3.5 rounded-2xl text-sm shadow-lg shadow-slate-900/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2"
+              >
+                <Check className="w-5 h-5 text-emerald-400" />
+                <span>تأكيد الحجز وإصدار القسيمة الفندقية الرسمية</span>
+              </button>
+
+              <button
                 type="button"
                 onClick={handleWhatsAppBooking}
                 disabled={isSubmitting}
@@ -1332,14 +1440,15 @@ export const BookingModal: React.FC = () => {
               </button>
 
               <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white font-black py-3.5 rounded-2xl text-sm shadow-lg shadow-slate-900/20 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2"
+                type="button"
+                onClick={() => setBookingStep(2)}
+                className="w-full py-2.5 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-xs transition-colors"
               >
-                <Check className="w-5 h-5 text-emerald-400" />
-                <span>تأكيد الحجز وإصدار القسيمة الفندقية الرسمية</span>
+                ➡️ العودة لتعديل وسيلة الدفع أو البيانات
               </button>
             </div>
+              </div>
+            )}
 
           </form>
         </div>
