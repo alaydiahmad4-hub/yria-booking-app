@@ -147,7 +147,7 @@ export const WhatsAppSupportFAB: React.FC<WhatsAppSupportFABProps> = ({
   };
 
   return (
-    <div className="fixed bottom-6 left-4 sm:left-6 z-50 flex flex-col items-start select-none font-sans">
+    <div className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] md:bottom-6 left-4 sm:left-6 z-50 flex flex-col items-start select-none font-sans">
       
       {/* Live In-App Chat Modal */}
       {isOpen && (

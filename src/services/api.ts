@@ -1,11 +1,16 @@
 const getBaseUrl = () => {
-  if (typeof window === 'undefined') return 'http://192.168.1.6:5001/api';
+  if (typeof window === 'undefined') return 'http://192.168.2.121:5001/api';
+  try {
+    const customHost = localStorage.getItem('seyran_api_host');
+    if (customHost) return `${customHost.replace(/\/$/, '')}/api`;
+  } catch {}
+
   const host = window.location.hostname;
   if (host === 'localhost' || host === '127.0.0.1') {
     return 'http://localhost:5001/api';
   }
   if (host === 'appassets.androidplatform.net' || !host) {
-    return 'http://192.168.1.6:5001/api';
+    return 'http://192.168.2.121:5001/api';
   }
   return `http://${host}:5001/api`;
 };

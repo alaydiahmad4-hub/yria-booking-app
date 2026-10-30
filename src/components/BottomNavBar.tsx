@@ -25,7 +25,7 @@ export const BottomNavBar: React.FC = () => {
   const damascusHotelsCount = properties.filter(p => p.governorate === 'دمشق' && p.type === 'hotel').length;
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-2xl px-2 py-1.5 transition-all">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-2xl px-2 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom,0px))] transition-all">
       <div className="flex items-center justify-around max-w-md mx-auto">
         
         {/* Tab 1: Explore / Home */}

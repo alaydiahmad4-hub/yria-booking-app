@@ -37,3 +37,4 @@ coverage
 *.jks
 *.keystore
 *.log
+*.apk
