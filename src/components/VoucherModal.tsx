@@ -51,7 +51,7 @@ export const VoucherModal: React.FC = () => {
 
   const handleDownloadPdf = () => {
     const host = window.location.hostname || 'localhost';
-    const bookingId = latestConfirmedBooking?.id || 'book-1';
+    const bookingId = encodeURIComponent(latestConfirmedBooking?.id || 'book-1');
     const pdfUrl = `http://${host}:5001/api/bookings/${bookingId}/pdf`;
     window.open(pdfUrl, '_blank');
   };

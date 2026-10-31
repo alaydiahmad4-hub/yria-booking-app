@@ -35,7 +35,13 @@ interface WhatsAppSupportFABProps {
 export const WhatsAppSupportFAB: React.FC<WhatsAppSupportFABProps> = ({
   customPhone = '963933112233',
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { 
+    isChatOpen: isOpen, 
+    setIsChatOpen: setIsOpen, 
+    chatPropertyContext, 
+    setChatPropertyContext,
+    sendChatMessage 
+  } = useApp();
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -58,6 +64,26 @@ export const WhatsAppSupportFAB: React.FC<WhatsAppSupportFABProps> = ({
       scrollToBottom();
     }
   }, [messages, isOpen]);
+
+  useEffect(() => {
+    if (chatPropertyContext && isOpen) {
+      const ctxMsgId = `prop-ctx-${chatPropertyContext.id}`;
+      setMessages(prev => {
+        if (prev.some(m => m.id === ctxMsgId)) return prev;
+        return [
+          ...prev,
+          {
+            id: ctxMsgId,
+            sender: 'bot',
+            text: `🏡 أهلاً بك! أنت تستفسر الآن عن "${chatPropertyContext.title}" في (${chatPropertyContext.area}). السعر المعتمد: $${chatPropertyContext.priceUsd} / ليلة. تفضل بطرح أي سؤال أو اطلب تثبيت الحجز فوراً!`,
+            timestamp: 'الآن',
+            actionType: 'whatsapp',
+            actionLabel: 'تواصل مباشر مع المضيف عبر واتساب'
+          }
+        ];
+      });
+    }
+  }, [chatPropertyContext?.id, isOpen]);
 
   // Quick topics for immediate help
   const quickTopics = [
@@ -123,6 +149,7 @@ export const WhatsAppSupportFAB: React.FC<WhatsAppSupportFABProps> = ({
     setMessages(prev => [...prev, userMsg]);
     setInputText('');
     setIsTyping(true);
+    sendChatMessage(text).catch(() => {});
 
     setTimeout(() => {
       const { reply, actionType, actionLabel } = generateBotReply(text);

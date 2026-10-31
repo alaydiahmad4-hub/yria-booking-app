@@ -562,6 +562,7 @@ app.get('/api/stats', (req, res) => {
     const totalProperties = db.prepare('SELECT COUNT(*) as c FROM properties').get().c;
     const approvedProps = db.prepare("SELECT COUNT(*) as c FROM properties WHERE status = 'approved'").get().c;
     const pendingProps = db.prepare("SELECT COUNT(*) as c FROM properties WHERE status = 'pending_approval'").get().c;
+    const verifiedProps = db.prepare('SELECT COUNT(*) as c FROM properties WHERE is_verified_field = 1').get().c;
 
     const volumeQuery = db.prepare('SELECT SUM(total_price_usd) as totalUsd, SUM(deposit_usd) as escrowUsd FROM bookings').get();
     const totalVolumeUsd = volumeQuery.totalUsd || 0;
@@ -571,9 +572,13 @@ app.get('/api/stats', (req, res) => {
       totalBookings,
       totalVolumeUsd,
       pendingEscrowUsd,
+      totalDepositHeldUsd: pendingEscrowUsd,
       propertiesCount: totalProperties,
+      totalProperties,
       approvedProperties: approvedProps,
-      pendingProperties: pendingProps
+      pendingProperties: pendingProps,
+      pendingApprovalsCount: pendingProps,
+      fieldVerifiedCount: verifiedProps
     });
   } catch (err) {
     console.error('Stats error:', err);
@@ -742,8 +747,9 @@ app.delete('/api/chat/messages', (req, res) => {
 // -------------------------------------------------------------
 app.get('/api/bookings/:id/pdf', (req, res) => {
   try {
-    const bookingRow = db.prepare('SELECT * FROM bookings WHERE id = ?').get(req.params.id) ||
-                       db.prepare('SELECT * FROM bookings LIMIT 1').get();
+    const rawId = decodeURIComponent(req.params.id || '');
+    const bookingRow = db.prepare('SELECT * FROM bookings WHERE id = ? OR id = ?').get(rawId, `#${rawId.replace(/^#/, '')}`) ||
+                       db.prepare('SELECT * FROM bookings ORDER BY created_at DESC LIMIT 1').get();
     if (!bookingRow) {
       return res.status(404).json({ error: 'Booking not found' });
     }
@@ -757,9 +763,10 @@ app.get('/api/bookings/:id/pdf', (req, res) => {
       try { property = JSON.parse(propRow.data_json); } catch { property = propRow; }
     }
 
+    const safeId = String(bookingRow.id || 'voucher').replace(/[^a-zA-Z0-9_-]/g, '');
     const payload = { booking, property };
     const tempJson = path.join(__dirname, `temp_${Date.now()}.json`);
-    const outPdf = path.join(__dirname, `voucher_${bookingRow.id}.pdf`);
+    const outPdf = path.join(__dirname, `voucher_${safeId}_${Date.now()}.pdf`);
 
     fs.writeFileSync(tempJson, JSON.stringify(payload), 'utf-8');
     execSync(`python generate_voucher_pdf.py "${tempJson}" "${outPdf}"`, { cwd: __dirname, timeout: 15000 });
@@ -770,7 +777,7 @@ app.get('/api/bookings/:id/pdf', (req, res) => {
     try { fs.unlinkSync(outPdf); } catch (e) {}
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="Seyran_Voucher_${bookingRow.id}.pdf"`);
+    res.setHeader('Content-Disposition', `attachment; filename="Seyran_Voucher_${safeId}.pdf"`);
     res.send(pdfBuffer);
   } catch (err) {
     console.error('PDF Generation Error:', err);

@@ -13,7 +13,8 @@ import {
   Coffee, 
   ShieldCheck,
   Lock,
-  BatteryCharging
+  BatteryCharging,
+  Scale
 } from 'lucide-react';
 
 import { SYP_PER_USD } from '../data/mockData';
@@ -32,10 +33,14 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
     setIsReviewsModalOpen,
     isPriceFrozen,
     getFrozenPrice,
-    sypExchangeRate
+    sypExchangeRate,
+    comparisonList,
+    addToComparison,
+    removeFromComparison
   } = useApp();
 
   const favorited = isFavorite(property.id);
+  const isCompared = comparisonList.includes(property.id);
   const frozen = isPriceFrozen(property.id);
   const effectivePrice = frozen ? (getFrozenPrice(property.id) ?? property.priceUsd) : property.priceUsd;
 
@@ -64,8 +69,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           loading="lazy"
         />
 
-        {/* Favorite Wishlist Button (Single Clean Control) */}
-        <div className="absolute top-3 left-3 z-10">
+        {/* Favorite Wishlist & Compare Buttons */}
+        <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -75,6 +80,21 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             title="حفظ في المفضلة"
           >
             <Heart className={`w-4 h-4 transition-colors ${favorited ? 'text-rose-500 fill-rose-500' : 'text-slate-700'}`} />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isCompared) removeFromComparison(property.id);
+              else addToComparison(property.id);
+            }}
+            className={`p-2.5 rounded-full backdrop-blur-md transition-all hover:scale-110 shadow-sm ${
+              isCompared
+                ? 'bg-emerald-600 text-white'
+                : 'bg-white/85 hover:bg-white text-slate-700'
+            }`}
+            title={isCompared ? 'إزالة من المقارنة' : 'إضافة للمقارنة'}
+          >
+            <Scale className="w-4 h-4" />
           </button>
         </div>
 

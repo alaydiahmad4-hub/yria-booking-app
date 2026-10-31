@@ -72,7 +72,10 @@ export const MainContent: React.FC = () => {
     activeTab,
     setActiveTab,
     syrianSpecialCategory,
-    setSyrianSpecialCategory
+    setSyrianSpecialCategory,
+    comparisonList,
+    setIsComparisonModalOpen,
+    clearComparison
   } = useApp();
 
   // Damascus hotels subset for featured banner
@@ -454,6 +457,29 @@ export const MainContent: React.FC = () => {
       )}
 
       <Footer />
+
+      {/* Floating Property Comparison Bar */}
+      {comparisonList.length > 0 && (
+        <div className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 bg-slate-900/95 backdrop-blur-md text-white px-4 py-3 rounded-2xl shadow-2xl border border-emerald-500/40 flex items-center gap-3 animate-fadeIn">
+          <div className="text-xs">
+            <span className="font-black text-emerald-400">{comparisonList.length}</span>{' '}
+            <span className="font-bold">عقارات مختارة للمقارنة</span>
+          </div>
+          <button
+            onClick={() => setIsComparisonModalOpen(true)}
+            className="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs px-3.5 py-1.5 rounded-xl transition-all shadow-sm"
+          >
+            عرض جدول المقارنة
+          </button>
+          <button
+            onClick={clearComparison}
+            className="text-[11px] text-slate-400 hover:text-rose-400 font-bold px-1.5"
+          >
+            مسح
+          </button>
+        </div>
+      )}
+
       <WhatsAppSupportFAB />
 
       {/* Mobile Bottom Navigation Bar */}

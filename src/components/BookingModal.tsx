@@ -67,11 +67,20 @@ export const BookingModal: React.FC = () => {
   }, [isBookingOpen, selectedProperty?.id]);
 
   const [bookingType, setBookingType] = useState<'overnight' | 'day_use'>('overnight');
+  const [checkInDate, setCheckInDate] = useState<string>(() => {
+    return new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  });
   const [nights, setNights] = useState(2);
   const [guestsCount, setGuestsCount] = useState(2);
   const [guestName, setGuestName] = useState('');
   const [guestPhone, setGuestPhone] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('syriatel_cash');
+
+  const computedCheckOutDate = (() => {
+    const baseMs = Date.parse(checkInDate) || Date.now();
+    const daysToAdd = bookingType === 'day_use' ? 1 : nights;
+    return new Date(baseMs + daysToAdd * 86400000).toISOString().split('T')[0];
+  })();
 
   // Expatriate Family Gifting Feature
   const [isFamilyGift, setIsFamilyGift] = useState(false);
@@ -172,7 +181,7 @@ export const BookingModal: React.FC = () => {
       return;
     }
 
-    const bookingId = `#HJ-${Math.floor(100000 + Math.random() * 900000)}`;
+    const bookingId = `HJ-${Math.floor(100000 + Math.random() * 900000)}`;
     const finalPaymentMethod: PaymentMethod = payCurrency === 'USD' ? usdMethod : sypMethod;
     const isUsd = payCurrency === 'USD';
 
@@ -180,8 +189,8 @@ export const BookingModal: React.FC = () => {
       id: bookingId,
       propertyId: selectedProperty.id,
       bookingType,
-      checkIn: new Date().toISOString().split('T')[0],
-      checkOut: new Date(Date.now() + (bookingType === 'day_use' ? 1 : nights) * 86400000).toISOString().split('T')[0],
+      checkIn: checkInDate,
+      checkOut: computedCheckOutDate,
       guestsCount,
       guestName,
       guestPhone,
@@ -230,7 +239,7 @@ export const BookingModal: React.FC = () => {
       return;
     }
 
-    const bookingId = `#HJ-${Math.floor(100000 + Math.random() * 900000)}`;
+    const bookingId = `HJ-${Math.floor(100000 + Math.random() * 900000)}`;
     const finalPaymentMethod: PaymentMethod = payCurrency === 'USD' ? usdMethod : sypMethod;
     const isUsd = payCurrency === 'USD';
     const depositUsd = Math.round(totalUsd * 0.25);
@@ -240,8 +249,8 @@ export const BookingModal: React.FC = () => {
       id: bookingId,
       propertyId: selectedProperty.id,
       bookingType,
-      checkIn: new Date().toISOString().split('T')[0],
-      checkOut: new Date(Date.now() + (bookingType === 'day_use' ? 1 : nights) * 86400000).toISOString().split('T')[0],
+      checkIn: checkInDate,
+      checkOut: computedCheckOutDate,
       guestsCount,
       guestName,
       guestPhone,
@@ -488,10 +497,27 @@ export const BookingModal: React.FC = () => {
 
             {/* Trip Parameters */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200/70">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4 text-emerald-600" />
+                  تاريخ تسجيل الوصول (Check-in)
+                </label>
+                <input
+                  type="date"
+                  min={new Date().toISOString().split('T')[0]}
+                  value={checkInDate}
+                  onChange={(e) => setCheckInDate(e.target.value)}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+                <span className="text-[10px] text-emerald-700 font-bold mt-1 block">
+                  المغادرة التلقائية: {computedCheckOutDate}
+                </span>
+              </div>
+
               {bookingType === 'overnight' && (
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-emerald-600" />
+                    <Clock className="w-4 h-4 text-emerald-600" />
                     مدة الإقامة (عدد الليالي)
                   </label>
                   <select
@@ -509,7 +535,7 @@ export const BookingModal: React.FC = () => {
                 </div>
               )}
 
-              <div className={bookingType === 'day_use' ? 'sm:col-span-2' : ''}>
+              <div className={bookingType === 'overnight' ? 'sm:col-span-2' : ''}>
                 <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
                   <Users className="w-4 h-4 text-emerald-600" />
                   عدد النزلاء

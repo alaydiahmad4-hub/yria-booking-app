@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { SYP_PER_USD } from '../data/mockData';
 import { 
@@ -32,7 +32,8 @@ import {
   Gift,
   ChevronLeft,
   Building,
-  Bot
+  Bot,
+  Scale
 } from 'lucide-react';
 
 export const PropertyDetailsModal: React.FC = () => {
@@ -43,6 +44,7 @@ export const PropertyDetailsModal: React.FC = () => {
     currency,
     isFavorite, 
     toggleFavorite,
+    isBookingOpen,
     setIsBookingOpen,
     setIsReviewsModalOpen,
     openLightbox,
@@ -53,13 +55,22 @@ export const PropertyDetailsModal: React.FC = () => {
     setSelectedRoomId,
     openChatWithProperty,
     addNotification,
-    sypExchangeRate
+    sypExchangeRate,
+    comparisonList,
+    addToComparison,
+    setIsComparisonModalOpen
   } = useApp();
 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [freezeSuccess, setFreezeSuccess] = useState(false);
 
-  if (!selectedProperty) return null;
+  useEffect(() => {
+    setActiveImageIndex(0);
+  }, [selectedProperty?.id]);
+
+  if (!selectedProperty || isBookingOpen) return null;
+
+  const isCompared = comparisonList.includes(selectedProperty.id);
 
   const favorited = isFavorite(selectedProperty.id);
   const frozen = isPriceFrozen(selectedProperty.id);
@@ -87,7 +98,9 @@ export const PropertyDetailsModal: React.FC = () => {
   };
 
   const handleInAppChat = () => {
-    openChatWithProperty(selectedProperty);
+    const prop = selectedProperty;
+    setSelectedProperty(null);
+    openChatWithProperty(prop);
   };
 
   const handleFreezePrice = () => {
@@ -109,6 +122,24 @@ export const PropertyDetailsModal: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                addToComparison(selectedProperty.id);
+                if (comparisonList.length >= 1) {
+                  setSelectedProperty(null);
+                  setIsComparisonModalOpen(true);
+                }
+              }}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 border transition-all ${
+                isCompared
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                  : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
+              }`}
+              title="مقارنة العقار مع عقارات أخرى"
+            >
+              <Scale className="w-4 h-4 text-emerald-600" />
+              <span className="hidden sm:inline">{isCompared ? 'مضاف للمقارنة' : 'مقارنة العقار'}</span>
+            </button>
             <button
               onClick={handleShare}
               className="p-2 rounded-full hover:bg-slate-100 text-slate-600 transition-colors"
